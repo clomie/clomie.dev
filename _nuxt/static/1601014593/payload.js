@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/", (function(a){return {data:[{pages:[{title:"ウェブサイトを作った",toc:[],dir:"\u002Fposts",path:"\u002Fposts\u002F20200925-create-website",extension:".md",slug:"20200925-create-website",createdAt:a,updatedAt:a}]}],fetch:[],mutations:void 0}}("2020-09-25T06:15:23.871Z")));
