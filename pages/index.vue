@@ -16,7 +16,7 @@ import Vue from 'vue'
 
 export default Vue.extend({
   async asyncData({ $content }) {
-    const pages = await $content('posts').without(['body']).fetch()
+    const pages = await $content('posts').sortBy('createdAt', 'desc').fetch()
     return { pages }
   },
 })
