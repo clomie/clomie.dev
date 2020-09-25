@@ -47,6 +47,10 @@ main {
   max-width: 50rem;
 }
 
+img {
+  max-width: 100%;
+}
+
 time {
   font-size: 0.8rem;
   color: #666;
