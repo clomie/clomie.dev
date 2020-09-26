@@ -31,6 +31,7 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
+    '@nuxtjs/dayjs',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
   ],
