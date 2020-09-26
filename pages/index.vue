@@ -2,9 +2,7 @@
   <section>
     <ul>
       <li v-for="page in pages" :key="page.slug">
-        <time :datetime="page.createdAt">{{
-          page.createdAt.slice(0, 10)
-        }}</time>
+        <formatted-time :datetime="page.createdAt" />
         <nuxt-link :to="page.path">{{ page.title }}</nuxt-link>
       </li>
     </ul>
