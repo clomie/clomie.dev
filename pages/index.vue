@@ -6,6 +6,9 @@
         <nuxt-link :to="page.path">{{ page.title }}</nuxt-link>
       </li>
     </ul>
+    <p class="feed-link">
+      <a href="/feed.xml">feed</a>
+    </p>
   </section>
 </template>
 
@@ -24,5 +27,9 @@ export default Vue.extend({
 ul {
   list-style: none;
   padding-left: 0;
+}
+
+p.feed-link {
+  font-size: 0.8rem;
 }
 </style>
