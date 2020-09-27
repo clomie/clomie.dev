@@ -1,4 +1,5 @@
 import { execSync } from 'child_process'
+import { $content } from '@nuxt/content'
 
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
@@ -34,6 +35,7 @@ export default {
     '@nuxtjs/dayjs',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    '@nuxtjs/feed',
   ],
 
   // Content module configuration (https://go.nuxtjs.dev/content-config)
@@ -53,5 +55,38 @@ export default {
         document.createdAt = new Date(timestamps.pop())
       }
     },
+  },
+
+  async feed() {
+    const baseUrl = 'https://clomie.dev'
+    const baseDir = 'posts'
+    const posts = await $content(baseDir).fetch()
+
+    const create = function (feed, posts) {
+      feed.options = {
+        title: 'clomie.dev',
+        id: baseUrl,
+        link: baseUrl,
+      }
+
+      posts.forEach((post) => {
+        const url = `${baseUrl}/${baseDir}/${post.slug}`
+        feed.addItem({
+          title: post.title,
+          id: url,
+          link: url,
+          date: new Date(post.updatedAt),
+        })
+      })
+    }
+
+    return [
+      {
+        path: '/feed.xml',
+        type: 'atom1',
+        create,
+        data: posts,
+      },
+    ]
   },
 }

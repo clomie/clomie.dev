@@ -8,6 +8,9 @@
     <main>
       <Nuxt />
     </main>
+    <footer>
+      <span><nuxt-link to="/feed.xml">feed</nuxt-link></span>
+    </footer>
   </div>
 </template>
 
@@ -45,6 +48,11 @@ main {
   margin-right: auto;
   padding: 1rem 1rem 2rem;
   max-width: 50rem;
+}
+
+footer {
+  padding: 1rem;
+  font-size: 0.8rem;
 }
 
 img {
