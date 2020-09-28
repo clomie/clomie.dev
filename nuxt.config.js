@@ -60,7 +60,7 @@ export default {
   async feed() {
     const baseUrl = 'https://clomie.dev'
     const baseDir = 'posts'
-    const posts = await $content(baseDir).fetch()
+    const posts = await $content(baseDir).sortBy('createdAt', 'desc').fetch()
 
     const create = function (feed, posts) {
       feed.options = {
