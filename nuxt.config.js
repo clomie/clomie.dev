@@ -57,6 +57,10 @@ export default {
     },
   },
 
+  dayjs: {
+    plugins: ['utc', 'timezone'],
+  },
+
   async feed() {
     const baseUrl = 'https://clomie.dev'
     const baseDir = 'posts'
