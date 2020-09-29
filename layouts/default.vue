@@ -5,9 +5,7 @@
         <nuxt-link class="title" to="/">clomie.dev</nuxt-link>
       </nav>
     </header>
-    <main>
-      <Nuxt />
-    </main>
+    <Nuxt />
   </div>
 </template>
 
@@ -22,7 +20,7 @@ html {
   font-family: sans-serif;
   color: #333;
   font-size: 16px;
-  line-height: 1.8;
+  line-height: 1.9;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -54,5 +52,11 @@ img {
 time {
   font-size: 0.8rem;
   color: #666;
+  display: block;
+}
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 </style>

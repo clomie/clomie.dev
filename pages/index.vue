@@ -1,15 +1,17 @@
 <template>
-  <section>
-    <ul>
-      <li v-for="page in pages" :key="page.slug">
-        <formatted-time :datetime="page.createdAt" />
-        <nuxt-link :to="page.path">{{ page.title }}</nuxt-link>
-      </li>
-    </ul>
-    <p class="feed-link">
+  <main>
+    <section>
+      <ul>
+        <li v-for="page in pages" :key="page.slug">
+          <nuxt-link :to="page.path">{{ page.title }}</nuxt-link>
+          <formatted-time :datetime="page.createdAt" />
+        </li>
+      </ul>
+    </section>
+    <aside class="feed-link">
       <a href="/feed.xml">feed</a>
-    </p>
-  </section>
+    </aside>
+  </main>
 </template>
 
 <script lang="ts">
@@ -29,7 +31,11 @@ ul {
   padding-left: 0;
 }
 
-p.feed-link {
+li + li {
+  margin-top: 0.75rem;
+}
+
+.feed-link {
   font-size: 0.8rem;
 }
 </style>
