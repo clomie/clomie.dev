@@ -8,9 +8,6 @@
         </li>
       </ul>
     </section>
-    <aside class="feed-link">
-      <a href="/feed.xml">feed</a>
-    </aside>
   </main>
 </template>
 
@@ -31,11 +28,7 @@ ul {
   padding-left: 0;
 }
 
-li + li {
-  margin-top: 0.75rem;
-}
-
-.feed-link {
-  font-size: 0.8rem;
+li {
+  margin-top: 1rem;
 }
 </style>

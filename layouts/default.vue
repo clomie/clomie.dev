@@ -1,8 +1,12 @@
 <template>
   <div>
     <header>
+      <h1>
+        <nuxt-link to="/">clomie.dev</nuxt-link>
+      </h1>
       <nav>
-        <nuxt-link class="title" to="/">clomie.dev</nuxt-link>
+        <nuxt-link to="/about">About</nuxt-link>
+        <a href="/feed.xml">Feed</a>
       </nav>
     </header>
     <Nuxt />
@@ -20,7 +24,6 @@ html {
   font-family: sans-serif;
   color: #333;
   font-size: 16px;
-  line-height: 1.9;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -29,13 +32,25 @@ html {
 }
 
 header {
+  margin-left: auto;
+  margin-right: auto;
   padding: 1rem;
+  max-width: 50rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-header .title {
+header h1 {
+  margin: 0;
   font-size: 1.2rem;
+  font-weight: normal;
   color: #98cc9c;
-  text-decoration: none;
+}
+
+header nav a {
+  font-size: 0.85rem;
+  margin-left: 1rem;
 }
 
 main {
@@ -43,6 +58,19 @@ main {
   margin-right: auto;
   padding: 1rem 1rem 2rem;
   max-width: 50rem;
+  line-height: 1.9;
+}
+
+main h1,
+main h2,
+main h3 {
+  color: #444;
+  margin: 0;
+}
+
+h1 a {
+  color: inherit;
+  text-decoration: none;
 }
 
 img {

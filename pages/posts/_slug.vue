@@ -16,10 +16,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-h1 {
-  color: #444;
-  margin: 0;
-}
-</style>
