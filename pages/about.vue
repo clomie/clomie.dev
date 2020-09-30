@@ -6,11 +6,13 @@
       <h3>Link</h3>
       <ul>
         <li>
-          <a href="https://twitter.com">Twitter - @clomie</a>
+          <a href="https://twitter.com/clomie" target="_blank"
+            >Twitter - @clomie</a
+          >
           <span>質問や連絡はこちらへ</span>
         </li>
         <li>
-          <a href="https://github.com/clomie/clomie.dev"
+          <a href="https://github.com/clomie/clomie.dev" target="_blank"
             >GitHub - clomie/clomie.dev</a
           >
           <span>このウェブサイトのソースコードを公開しています</span>
