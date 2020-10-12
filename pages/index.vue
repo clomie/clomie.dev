@@ -19,6 +19,15 @@ export default Vue.extend({
     const pages = await $content('posts').sortBy('createdAt', 'desc').fetch()
     return { pages }
   },
+  head() {
+    return {
+      meta: [
+        { property: 'og:title', content: 'clomie.dev' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:url', content: 'https://clomie.dev/' },
+      ],
+    }
+  },
 })
 </script>
 

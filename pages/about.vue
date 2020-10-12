@@ -22,6 +22,22 @@
   </main>
 </template>
 
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+  head() {
+    return {
+      title: 'About',
+      meta: [
+        { property: 'og:title', content: 'About' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:url', content: 'https://clomie.dev/about' },
+      ],
+    }
+  },
+})
+</script>
+
 <style scoped>
 ul {
   list-style: none;

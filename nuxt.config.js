@@ -7,11 +7,17 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'clomie.dev',
+    titleTemplate(titleChunk) {
+      return titleChunk ? `${titleChunk} - clomie.dev` : 'clomie.dev'
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+
+      { property: 'og:image', content: 'https://clomie.dev/images/clomie.png' },
+    ],
+    link: [
+      { rel: 'alternate', type: 'application/rss+xml', href: '/feed.xml' },
     ],
   },
 
