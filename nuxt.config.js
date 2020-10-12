@@ -7,6 +7,9 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
+    htmlAttrs: {
+      lang: 'ja',
+    },
     titleTemplate(titleChunk) {
       return titleChunk ? `${titleChunk} - clomie.dev` : 'clomie.dev'
     },
