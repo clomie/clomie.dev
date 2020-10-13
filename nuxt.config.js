@@ -16,8 +16,11 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-
-      { property: 'og:image', content: 'https://clomie.dev/images/clomie.png' },
+      {
+        property: 'og:image',
+        hid: 'og:image',
+        content: 'https://clomie.dev/images/clomie.png',
+      },
     ],
     link: [
       { rel: 'alternate', type: 'application/rss+xml', href: '/feed.xml' },
