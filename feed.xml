@@ -2,9 +2,15 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://clomie.dev</id>
     <title>clomie.dev</title>
-    <updated>2020-10-24T01:20:51.610Z</updated>
+    <updated>2020-10-24T01:21:29.397Z</updated>
     <generator>https://github.com/nuxt-community/feed-module</generator>
     <link rel="alternate" href="https://clomie.dev"/>
+    <entry>
+        <title type="html"><![CDATA[ルーターのファームウェアを更新した]]></title>
+        <id>https://clomie.dev/posts/20201024-router-firmware</id>
+        <link href="https://clomie.dev/posts/20201024-router-firmware"/>
+        <updated>2020-10-24T01:20:03.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[USBケーブルを作った]]></title>
         <id>https://clomie.dev/posts/20201023-cable</id>
