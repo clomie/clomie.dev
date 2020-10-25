@@ -45,7 +45,6 @@ header h1 {
   margin: 0;
   font-size: 1.2rem;
   font-weight: normal;
-  color: #98cc9c;
 }
 
 header nav a {
@@ -68,9 +67,13 @@ main h3 {
   margin: 0;
 }
 
-h1 a {
-  color: inherit;
+a {
+  color: #82a274;
   text-decoration: none;
+}
+
+h1 a {
+  color: #96b984;
 }
 
 img {
