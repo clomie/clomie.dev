@@ -77,7 +77,7 @@ img {
   max-width: 100%;
 }
 
-time {
+div.timestamp {
   font-size: 0.8rem;
   color: #666;
   display: block;

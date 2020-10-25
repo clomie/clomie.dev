@@ -4,7 +4,9 @@
       <ul>
         <li v-for="page in pages" :key="page.slug">
           <nuxt-link :to="page.path">{{ page.title }}</nuxt-link>
-          <formatted-time :datetime="page.createdAt" />
+          <div class="timestamp">
+            <formatted-time :datetime="page.createdAt" />
+          </div>
         </li>
       </ul>
     </section>

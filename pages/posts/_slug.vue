@@ -2,7 +2,12 @@
   <main>
     <article>
       <h1>{{ page.title }}</h1>
-      <formatted-time :datetime="page.createdAt" />
+      <div class="timestamp">
+        <formatted-time :datetime="page.createdAt" /><template
+          v-if="page.createdAt !== page.updatedAt"
+          >, Updated: <formatted-time :datetime="page.updatedAt"
+        /></template>
+      </div>
       <nuxt-content :document="page" />
     </article>
   </main>
