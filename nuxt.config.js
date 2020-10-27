@@ -23,6 +23,7 @@ export default {
       },
     ],
     link: [
+      { rel: 'stylesheet', href: '/styles/index.css' },
       { rel: 'alternate', type: 'application/rss+xml', href: '/feed.xml' },
     ],
   },

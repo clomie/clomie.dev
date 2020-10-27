@@ -4,20 +4,20 @@
       <h1>About</h1>
       <p>このウェブサイトのテキストは clomie が書いたものです。</p>
       <h3>Link</h3>
-      <ul>
-        <li>
+      <dl>
+        <dt>
           <a href="https://twitter.com/clomie" target="_blank"
             >Twitter - @clomie</a
           >
-          <span>質問や連絡はこちらへ</span>
-        </li>
-        <li>
+        </dt>
+        <dd>質問や連絡はこちらへ</dd>
+        <dt>
           <a href="https://github.com/clomie/clomie.dev" target="_blank"
             >GitHub - clomie/clomie.dev</a
           >
-          <span>このウェブサイトのソースコードを公開しています</span>
-        </li>
-      </ul>
+        </dt>
+        <dd>このウェブサイトのソースコードを公開しています</dd>
+      </dl>
     </section>
   </main>
 </template>
@@ -37,18 +37,3 @@ export default Vue.extend({
   },
 })
 </script>
-
-<style scoped>
-ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-li {
-  margin-top: 1rem;
-}
-
-li span {
-  display: block;
-}
-</style>

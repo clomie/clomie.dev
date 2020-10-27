@@ -1,7 +1,7 @@
 <template>
   <main>
     <section>
-      <ul>
+      <ul class="posts">
         <li v-for="page in pages" :key="page.slug">
           <nuxt-link :to="page.path">{{ page.title }}</nuxt-link>
           <div class="timestamp">
@@ -32,14 +32,3 @@ export default Vue.extend({
   },
 })
 </script>
-
-<style scoped>
-ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-li {
-  margin-top: 1rem;
-}
-</style>
