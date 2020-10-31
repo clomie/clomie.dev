@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="フィード、@nuxt/content のライブ編集" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://clomie.dev/posts/20200927-editor-feed" />
+    <meta property="og:image" content="https://clomie.dev/images/clomie.png" />
+    <meta property="twitter:card" content="summary" />
+    <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+    <title>フィード、@nuxt/content のライブ編集 - clomie.dev</title>
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">clomie.dev</a></h1>
+      <nav><a href="/about">About</a><a href="/feed.xml">Feed</a></nav>
+    </header>
+    <main>
+      <article>
+        <h1>フィード、@nuxt/content のライブ編集</h1>
+        <div class="timestamp"><time datetime="2020-09-27T15:38:50+00:00">2020/09/27 15:38</time></div>
+        <div>
+          <p>ウェブサイトに RSS 用の Atom フィードを設置した。 @nuxtjs/feed を使えば簡単だった。いつも思うけど Atom と RSS2.0 はどっちで公開するのが良いのだろうか。両方あれば良いのだろうとは思うが、片方だけでどういうときに困るかがあまり思いつかない。</p>
+          <hr />
+          <p>@nuxt/content のライブ編集が体験が良いと書いておきながら、IME の変換候補を Tab キーで選択すると変な挙動をするのに気づいたので使っていなかった。自分が IME の変換候補を Tab キーで選択していることに初めて気づいた。</p>
+          <p>修正できないかと思って調べたところ IME を使った文字編集には <a href="https://developer.mozilla.org/ja/docs/Web/API/Element/compositionstart_event">compositionStart</a>などのイベントが発生するようだった。このイベントを使って確定するまでは Tab キーのハンドリングをしないように修正して Pull Request を投げてみた。</p>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

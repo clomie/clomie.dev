@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="node-mysql2 モジュールと Amazon RDS の証明書" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://clomie.dev/posts/20201027-rds-tls-certificate" />
+    <meta property="og:image" content="https://clomie.dev/images/clomie.png" />
+    <meta property="twitter:card" content="summary" />
+    <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+    <title>node-mysql2 モジュールと Amazon RDS の証明書 - clomie.dev</title>
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">clomie.dev</a></h1>
+      <nav><a href="/about">About</a><a href="/feed.xml">Feed</a></nav>
+    </header>
+    <main>
+      <article>
+        <h1>node-mysql2 モジュールと Amazon RDS の証明書</h1>
+        <div class="timestamp"><time datetime="2020-10-27T13:16:17+00:00">2020/10/27 13:16</time></div>
+        <div>
+          <p><a href="https://github.com/sidorares/node-mysql2">node-mysql2</a> モジュールに RDS の証明書が組み込まれていて驚いた話。</p>
+          <p>さいきん仕事で Lambda から RDS(Aurora/MySQL) を使うアプリを書いている。IAM 認証を使っていて、DB 接続には SSL/TLS 証明書が必要なのだけど、普段書いている Node.js の場合は証明書の存在をそこまで気にすることがなかった。</p>
+          <p>Node.js の RDS に接続するコードはいつもこんな感じ。</p>
+          <pre><code>const connectionConfig = {
+    host,
+    user,
+    database,
+    ssl: 'Amazon RDS',
+    authPlugins: { mysql_clear_password: () => () => authToken }
+};
+</code></pre>
+          <p>おそらく <code>ssl: 'Amazon RDS'</code> の部分で指定した名前の SSL 証明書が Lambda の Node.js コンテナランタイムにプリインストールされた中から良い感じに選択されているのだろう、なんて特に根拠もなく都合の良い解釈をしていた。RDS Proxy の場合は直接 RDS に接続する場合と必要な証明書が違うので、実際に使われている証明書がどこにある何なのかを調べてみようとしたこともあったけど、動かしたら動いてしまったのもあり、そのうち忘れてしまっていた。</p>
+          <p>ところが Python や Golang で同じく RDS に SSL/TLS で接続しようとすると、証明書をファイルとしてビルド時にアーカイブに含めたり、ソースコードに埋め込む必要が出てきたりする。</p>
+          <p>Node.js だけ証明書が必要ないのは何故か気になって改めて調べてみると、node-mysql2 モジュールに証明書そのものが組み込まれている含まれていることがわかった。node-mysql2 モジュールはあくまで MySQL ドライバだと思っていたので、これは意外に感じる。</p>
+          <p>https://github.com/sidorares/node-mysql2/blob/v2.2.5/lib/constants/ssl_profiles.js</p>
+          <p>RDS の証明書は去年から今年のはじめにかけてローテーションがあって、それまで使われていた証明書が使えなくなっている。5年周期のようなので次は2024年だけど、その際は証明書の更新ではなくモジュールそのものを更新することになるのだろう。</p>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

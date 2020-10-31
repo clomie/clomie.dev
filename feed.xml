@@ -1,86 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://clomie.dev</id>
-    <title>clomie.dev</title>
-    <updated>2020-10-30T16:58:31.610Z</updated>
-    <generator>https://github.com/nuxt-community/feed-module</generator>
-    <link rel="alternate" href="https://clomie.dev"/>
-    <entry>
-        <title type="html"><![CDATA[node-mysql2 モジュールと Amazon RDS の証明書]]></title>
-        <id>https://clomie.dev/posts/20201027-rds-tls-certificate</id>
-        <link href="https://clomie.dev/posts/20201027-rds-tls-certificate"/>
-        <updated>2020-10-27T13:16:17.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[デスクマット]]></title>
-        <id>https://clomie.dev/posts/20201026-deskmat</id>
-        <link href="https://clomie.dev/posts/20201026-deskmat"/>
-        <updated>2020-10-26T13:11:27.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[五反田と品川]]></title>
-        <id>https://clomie.dev/posts/20201025-gotanda-shinagawa</id>
-        <link href="https://clomie.dev/posts/20201025-gotanda-shinagawa"/>
-        <updated>2020-10-25T12:29:33.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[ルーターのファームウェア、庭の芝刈り]]></title>
-        <id>https://clomie.dev/posts/20201024-router-firmware</id>
-        <link href="https://clomie.dev/posts/20201024-router-firmware"/>
-        <updated>2020-10-24T08:00:46.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[USBケーブルを作った]]></title>
-        <id>https://clomie.dev/posts/20201023-cable</id>
-        <link href="https://clomie.dev/posts/20201023-cable"/>
-        <updated>2020-10-23T15:00:19.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[石油ファンヒーター]]></title>
-        <id>https://clomie.dev/posts/20201021-fanheater</id>
-        <link href="https://clomie.dev/posts/20201021-fanheater"/>
-        <updated>2020-10-21T13:24:37.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[USB ケーブルのコネクタ]]></title>
-        <id>https://clomie.dev/posts/20201013-connector</id>
-        <link href="https://clomie.dev/posts/20201013-connector"/>
-        <updated>2020-10-13T13:45:22.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[庭の草むしりをした]]></title>
-        <id>https://clomie.dev/posts/20201003-gardening</id>
-        <link href="https://clomie.dev/posts/20201003-gardening"/>
-        <updated>2020-10-03T13:12:20.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[サイトのレイアウト、モニタの使い勝手]]></title>
-        <id>https://clomie.dev/posts/20201002-authorizer</id>
-        <link href="https://clomie.dev/posts/20201002-authorizer"/>
-        <updated>2020-10-02T15:16:07.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[フィード、@nuxt/content のライブ編集]]></title>
-        <id>https://clomie.dev/posts/20200927-editor-feed</id>
-        <link href="https://clomie.dev/posts/20200927-editor-feed"/>
-        <updated>2020-09-27T15:38:50.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[投稿時刻を直した]]></title>
-        <id>https://clomie.dev/posts/20200926-timestamps</id>
-        <link href="https://clomie.dev/posts/20200926-timestamps"/>
-        <updated>2020-09-26T14:56:38.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[PCモニタを買った]]></title>
-        <id>https://clomie.dev/posts/20200925-monitor</id>
-        <link href="https://clomie.dev/posts/20200925-monitor"/>
-        <updated>2020-09-30T14:57:58.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[ウェブサイトを作った]]></title>
-        <id>https://clomie.dev/posts/20200925-create-website</id>
-        <link href="https://clomie.dev/posts/20200925-create-website"/>
-        <updated>2020-09-25T05:41:01.000Z</updated>
-    </entry>
+  <id>https://clomie.dev</id>
+  <title>clomie.dev</title>
+  <updated>2020-10-31T02:57:51.838Z</updated>
+  <link rel="alternate" href="https://clomie.dev" />
+  <entry>
+    <title type="html">node-mysql2 モジュールと Amazon RDS の証明書</title>
+    <id>https://clomie.dev/posts/20201027-rds-tls-certificate</id>
+    <link href="https://clomie.dev/posts/20201027-rds-tls-certificate" />
+    <updated>2020-10-27T13:16:17.000Z</updated>
+  </entry>
+  <entry>
+    <title type="html">デスクマット</title>
+    <id>https://clomie.dev/posts/20201026-deskmat</id>
+    <link href="https://clomie.dev/posts/20201026-deskmat" />
+    <updated>2020-10-26T13:11:27.000Z</updated>
+  </entry>
+  <entry>
+    <title type="html">五反田と品川</title>
+    <id>https://clomie.dev/posts/20201025-gotanda-shinagawa</id>
+    <link href="https://clomie.dev/posts/20201025-gotanda-shinagawa" />
+    <updated>2020-10-25T12:29:33.000Z</updated>
+  </entry>
+  <entry>
+    <title type="html">ルーターのファームウェア、庭の芝刈り</title>
+    <id>https://clomie.dev/posts/20201024-router-firmware</id>
+    <link href="https://clomie.dev/posts/20201024-router-firmware" />
+    <updated>2020-10-24T01:20:03.000Z</updated>
+  </entry>
+  <entry>
+    <title type="html">USBケーブルを作った</title>
+    <id>https://clomie.dev/posts/20201023-cable</id>
+    <link href="https://clomie.dev/posts/20201023-cable" />
+    <updated>2020-10-23T14:34:11.000Z</updated>
+  </entry>
+  <entry>
+    <title type="html">石油ファンヒーター</title>
+    <id>https://clomie.dev/posts/20201021-fanheater</id>
+    <link href="https://clomie.dev/posts/20201021-fanheater" />
+    <updated>2020-10-21T13:24:37.000Z</updated>
+  </entry>
+  <entry>
+    <title type="html">USB ケーブルのコネクタ</title>
+    <id>https://clomie.dev/posts/20201013-connector</id>
+    <link href="https://clomie.dev/posts/20201013-connector" />
+    <updated>2020-10-13T13:45:22.000Z</updated>
+  </entry>
+  <entry>
+    <title type="html">庭の草むしりをした</title>
+    <id>https://clomie.dev/posts/20201003-gardening</id>
+    <link href="https://clomie.dev/posts/20201003-gardening" />
+    <updated>2020-10-03T13:12:20.000Z</updated>
+  </entry>
+  <entry>
+    <title type="html">サイトのレイアウト、モニタの使い勝手</title>
+    <id>https://clomie.dev/posts/20201002-authorizer</id>
+    <link href="https://clomie.dev/posts/20201002-authorizer" />
+    <updated>2020-10-02T15:16:07.000Z</updated>
+  </entry>
+  <entry>
+    <title type="html">フィード、@nuxt/content のライブ編集</title>
+    <id>https://clomie.dev/posts/20200927-editor-feed</id>
+    <link href="https://clomie.dev/posts/20200927-editor-feed" />
+    <updated>2020-09-27T15:38:50.000Z</updated>
+  </entry>
+  <entry>
+    <title type="html">投稿時刻を直した</title>
+    <id>https://clomie.dev/posts/20200926-timestamps</id>
+    <link href="https://clomie.dev/posts/20200926-timestamps" />
+    <updated>2020-09-26T14:56:38.000Z</updated>
+  </entry>
+  <entry>
+    <title type="html">PCモニタを買った</title>
+    <id>https://clomie.dev/posts/20200925-monitor</id>
+    <link href="https://clomie.dev/posts/20200925-monitor" />
+    <updated>2020-09-25T15:06:12.000Z</updated>
+  </entry>
+  <entry>
+    <title type="html">ウェブサイトを作った</title>
+    <id>https://clomie.dev/posts/20200925-create-website</id>
+    <link href="https://clomie.dev/posts/20200925-create-website" />
+    <updated>2020-09-25T05:41:01.000Z</updated>
+  </entry>
 </feed>
