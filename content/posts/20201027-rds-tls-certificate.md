@@ -21,8 +21,8 @@ const connectionConfig = {
 
 ところが Python や Golang で同じく RDS に SSL/TLS で接続しようとすると、証明書をファイルとしてビルド時にアーカイブに含めたり、ソースコードに埋め込む必要が出てきたりする。
 
-Node.js だけ証明書が必要ないのは何故か気になって改めて調べてみると、node-mysql2 モジュールに証明書そのものが組み込まれている含まれていることがわかった。node-mysql2 モジュールはあくまで MySQL ドライバだと思っていたので、これは意外に感じる。
+Node.js だけ証明書が必要ないのは何故か気になって改めて調べてみると、node-mysql2 モジュールに証明書そのものが組み込まれていることがわかった。node-mysql2 モジュールはあくまで MySQL ドライバだと思っていたので、これは意外に感じる。
 
-https://github.com/sidorares/node-mysql2/blob/v2.2.5/lib/constants/ssl_profiles.js
+[https://github.com/sidorares/node-mysql2/blob/v2.2.5/lib/constants/ssl_profiles.js](https://github.com/sidorares/node-mysql2/blob/v2.2.5/lib/constants/ssl_profiles.js)
 
 RDS の証明書は去年から今年のはじめにかけてローテーションがあって、それまで使われていた証明書が使えなくなっている。5年周期のようなので次は2024年だけど、その際は証明書の更新ではなくモジュールそのものを更新することになるのだろう。
