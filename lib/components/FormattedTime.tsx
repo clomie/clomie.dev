@@ -12,7 +12,7 @@ type Props = {
 }
 
 export const FormattedTime = ({ datetime }: Props) => {
-  const day = dayjs(datetime)
+  const day = dayjs.tz(datetime)
   const attr = day.format()
   const body = day.format('YYYY/MM/DD HH:mm')
   return <time dateTime={attr}>{body}</time>
