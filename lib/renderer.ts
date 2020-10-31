@@ -31,6 +31,16 @@ const calculatePaths = (outDir: string, path: string) => {
   return { parent, outputPath }
 }
 
+const declaration = (path: string) => {
+  if (path.endsWith('.html')) {
+    return '<!DOCTYPE html>'
+  }
+  if (path.endsWith('.xml')) {
+    return '<?xml version="1.0" encoding="UTF-8"?>'
+  }
+  return ''
+}
+
 const prettify = (body: string, path: string) => {
   const prettierOptions: PrettierOptions = {
     filepath: path,
@@ -51,7 +61,7 @@ export const renderer = (
 
   const node = pageComponent({ path, ...pageProps })
   const rendered = renderToString(node)
-  const prettified = prettify(rendered, outputPath)
+  const prettified = prettify(declaration(outputPath) + rendered, outputPath)
 
   writeFileSync(outputPath, prettified)
 
