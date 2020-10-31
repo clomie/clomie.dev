@@ -8,7 +8,6 @@ html {
   font-family: sans-serif;
   color: #333;
   font-size: 16px;
-  word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
@@ -21,7 +20,7 @@ header {
   padding: 1rem;
   max-width: 50rem;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
 }
 
@@ -45,12 +44,10 @@ main {
   margin-right: auto;
   padding: 1rem 1rem 2rem;
   max-width: 50rem;
-  line-height: 1.9;
+  line-height: 2;
 }
 
-main h1,
-main h2,
-main h3 {
+main h1 {
   color: #444;
   margin: 0;
 }
@@ -62,6 +59,14 @@ a {
 
 img {
   max-width: 100%;
+}
+
+pre {
+  background-color: #f5f2f0;
+  padding: 0.75rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  overflow-x: auto;
 }
 
 hr {
@@ -82,16 +87,4 @@ div.timestamp {
   font-size: 0.8rem;
   color: #666;
   display: block;
-}
-
-textarea {
-  font-family: sans-serif;
-  color: #333;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  line-height: 1.9;
 }
