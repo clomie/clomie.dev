@@ -1,4 +1,4 @@
-declare interface Post {
+declare type Post = {
   path: string
   title: string
   createdAt: Date
