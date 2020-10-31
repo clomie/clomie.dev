@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="ウェブサイトの実装を変えた" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://clomie.dev/posts/20201028-website-ssg" />
+    <meta property="og:image" content="https://clomie.dev/images/clomie.png" />
+    <meta property="twitter:card" content="summary" />
+    <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+    <title>ウェブサイトの実装を変えた - clomie.dev</title>
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">clomie.dev</a></h1>
+      <nav><a href="/about">About</a><a href="/feed.xml">Feed</a></nav>
+    </header>
+    <main>
+      <article>
+        <h1>ウェブサイトの実装を変えた</h1>
+        <div class="timestamp"><time datetime="2020-10-31T07:00:54+00:00">2020/10/31 07:00</time></div>
+        <div>
+          <p>今までは nuxt/content を使って生成していたが、自前で実装したスクリプトに<a href="https://github.com/clomie/clomie.dev/commit/634622e2daf1c770149faaebe0918ca72885dc62">移行</a>した。</p>
+          <p>簡素なサイトなので JavaScript を入れたくない。出力される HTML をすべて制御してもっと簡素にしたい。ソースを表示したときに整形されたコードが見えてほしい。あたりが理由。</p>
+          <p>markdown で書いて、簡素な生成スクリプトで、内容を表示するだけのHTMLを出力できれば十分だった。いろいろ考えたけど、 TypeScript を使って JSX をテンプレートエンジンにして、 preact でレンダリングすることにした。 XML もゆるい型定義をしてあげると特に違和感なく生成されるので、フィードも JSX で生成できた。 markdown のパースからページの生成は nuxt/content を参考に remark, rehype を利用している。</p>
+          <p>テンプレートエンジンとしての JSX は、とても使い心地が良い。普段使っている VSCode ならほとんどセットアップ不要で整形や補完ができる。テンプレートファイルを読み込む手間もない。コンポーネント分割もただ関数に分離するだけ。実行に ts-node を使えばトランスパイルから実行まで1コマンドで済むのも良い。</p>
+          <pre><code>import { h, VNode } from 'preact'
+import renderToString from 'preact-render-to-string'
+
+const Layout = ({ title, children }: { title: string; children: VNode }) => (
+  &#x3C;html>
+    &#x3C;head>
+      &#x3C;title>{title}&#x3C;/title>
+    &#x3C;/head>
+    &#x3C;body>{children}&#x3C;/body>
+  &#x3C;/html>
+)
+const Page = (
+  &#x3C;Layout title="hello">
+    &#x3C;h1>Hello, world!&#x3C;/h1>
+  &#x3C;/Layout>
+)
+
+console.log('&#x3C;!DOCTYPE html>' + renderToString(Page))
+</code></pre>
+          <pre><code>% npx ts-node hoge.tsx
+&#x3C;!DOCTYPE html>&#x3C;html>&#x3C;head>&#x3C;title>hello&#x3C;/title>&#x3C;/head>&#x3C;body>&#x3C;h1>Hello, world!&#x3C;/h1>&#x3C;/body>&#x3C;/html>
+</code></pre>
+          <p>もっと色々やっているけど、基本的にはこういうことをやっているだけ。</p>
+          <p>結果として、ほとんど満足いく感じになった。ライブラリの都合による要素や属性は出力されなくなった。 meta や link など空要素のタグが self-closing な形で出てきてしまう点は少し気持ち悪く感じていたけど、 <a href="https://html.spec.whatwg.org/multipage/syntax.html#start-tags">HTML Living Standard の開始タグの項</a> を見ると許容されているので私も許容することにした。 XML の CDATA セクションを JSX できれいに扱う方法は見つからなかったが、 Atom フィードを作る上で必ずしも CDATA セクションを使う必要はないことがわかった。 DOCTYPE 宣言は出力してくれないようなので、ただの文字列でくっつけている。</p>
+          <p>Github Actions のビルド時間も半分以下の30秒ぐらいになった。エコ。</p>
+          <p>フロントエンド周りは割と触れている方なのだけど、これまでは Vue.js ばかりで React には縁がなく、 JSX をまともに触るのは初めてだった。今回 JSX を触る機会が出来てよかったと思う。</p>
+          <p>1つだけ困ったことがあり、解決していないので書き残しておく。このウェブサイトでは記事の投稿時刻と更新時刻に元となる markdown ファイルの git のコミット履歴を利用している。このせいで、記事のフォルダを移動したり名前を変更すると、すべての記事の更新時刻が更新されてしまう。今回は markdown ファイルの場所は現状維持で乗り切ったけど、あまりこういう縛りを作りたくない。どうにかしたいけどあまり良い方法が思い浮かばないのでいったん忘れることにする。</p>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
