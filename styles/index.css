@@ -24,13 +24,10 @@ header {
   justify-content: space-between;
 }
 
-header h1 {
+header .site-title {
   margin: 0;
   font-size: 1.2rem;
   font-weight: normal;
-}
-
-header h1 a {
   color: #96b984;
 }
 
@@ -47,7 +44,9 @@ main {
   line-height: 2;
 }
 
-main h1 {
+main h1,
+main h2,
+main h3 {
   color: #444;
   margin: 0;
 }

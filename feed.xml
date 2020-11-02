@@ -1,91 +1,230 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <id>https://clomie.dev</id>
-  <title>clomie.dev</title>
-  <updated>2020-10-31T13:20:05.823Z</updated>
-  <link rel="alternate" href="https://clomie.dev" />
+  <title type="text">clomie.dev</title>
+  <updated>2020-11-02T12:36:29.986Z</updated>
+  <id>https://clomie.dev/</id>
+  <link rel="alternate" href="https://clomie.dev/" />
+  <link rel="self" type="application/atom+xml" href="https://clomie.dev/feed.xml" />
+  <author>
+    <name>clomie</name>
+  </author>
   <entry>
-    <title type="html">ウェブサイトの実装を変えた</title>
+    <title type="text">ウェブサイトの実装を変えた</title>
     <id>https://clomie.dev/posts/20201028-website-ssg</id>
-    <link href="https://clomie.dev/posts/20201028-website-ssg" />
-    <updated>2020-10-31T07:00:54.000Z</updated>
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20201028-website-ssg" />
+    <published>2020-10-31T07:00:54.000Z</published>
+    <updated>2020-10-31T13:19:25.000Z</updated>
+    <content type="html">&lt;p&gt;今までは nuxt/content を使って生成していたが、自前で実装したスクリプトに&lt;a href=&quot;https://github.com/clomie/clomie.dev/commit/634622e2daf1c770149faaebe0918ca72885dc62&quot;&gt;移行&lt;/a&gt;した。&lt;/p&gt;
+&lt;p&gt;簡素なサイトなので JavaScript を入れたくない。出力される HTML をすべて制御してもっと簡素にしたい。ソースを表示したときに整形されたコードが見えてほしい。あたりが理由。&lt;/p&gt;
+&lt;p&gt;markdown で書いて、簡素な生成スクリプトで、内容を表示するだけの HTML を出力できれば十分だった。いろいろ考えたけど、 TypeScript を使って JSX をテンプレートエンジンにして、 preact でレンダリングすることにした。 XML もゆるい型定義をしてあげると特に違和感なく生成されるので、フィードも JSX で生成できた。 markdown のパースからページの生成は nuxt/content を参考に remark, rehype を利用している。&lt;/p&gt;
+&lt;p&gt;テンプレートエンジンとしての JSX は、とても使い心地が良い。普段使っている VSCode ならほとんどセットアップ不要で整形や補完ができる。テンプレートファイルを読み込む手間もない。コンポーネント分割もただ関数に分離するだけ。実行に ts-node を使えばトランスパイルから実行まで1コマンドで済むのも良い。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import { h, VNode } from 'preact'
+import renderToString from 'preact-render-to-string'
+
+const Layout = ({ title, children }: { title: string; children: VNode }) =&gt; (
+  &amp;#x3C;html&gt;
+    &amp;#x3C;head&gt;
+      &amp;#x3C;title&gt;{title}&amp;#x3C;/title&gt;
+    &amp;#x3C;/head&gt;
+    &amp;#x3C;body&gt;{children}&amp;#x3C;/body&gt;
+  &amp;#x3C;/html&gt;
+)
+const Page = (
+  &amp;#x3C;Layout title=&quot;hello&quot;&gt;
+    &amp;#x3C;h1&gt;Hello, world!&amp;#x3C;/h1&gt;
+  &amp;#x3C;/Layout&gt;
+)
+
+console.log('&amp;#x3C;!DOCTYPE html&gt;' + renderToString(Page))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;% npx ts-node hoge.tsx
+&amp;#x3C;!DOCTYPE html&gt;&amp;#x3C;html&gt;&amp;#x3C;head&gt;&amp;#x3C;title&gt;hello&amp;#x3C;/title&gt;&amp;#x3C;/head&gt;&amp;#x3C;body&gt;&amp;#x3C;h1&gt;Hello, world!&amp;#x3C;/h1&gt;&amp;#x3C;/body&gt;&amp;#x3C;/html&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;もっと色々やっているけど、基本的にはこういうことをやっているだけ。&lt;/p&gt;
+&lt;p&gt;結果として、ほとんど満足いく感じになった。ライブラリの都合による要素や属性は出力されなくなった。 meta や link など空要素のタグが self-closing な形で出てきてしまう点は少し気持ち悪く感じていたけど、 &lt;a href=&quot;https://html.spec.whatwg.org/multipage/syntax.html#start-tags&quot;&gt;HTML Living Standard の開始タグの項&lt;/a&gt; を見ると許容されているので私も許容することにした。 XML の CDATA セクションを JSX できれいに扱う方法は見つからなかったが、 Atom フィードを作る上で必ずしも CDATA セクションを使う必要はないことがわかった。 DOCTYPE 宣言は出力してくれないようなので、ただの文字列でくっつけている。&lt;/p&gt;
+&lt;p&gt;Github Actions のビルド時間も半分以下の30秒ぐらいになった。エコ。&lt;/p&gt;
+&lt;p&gt;フロントエンド周りはこれまで Vue.js ばかりで React には縁がなく、 JSX を触るのは初めてだった。今回 JSX を触る機会が出来てよかったと思う。&lt;/p&gt;
+&lt;p&gt;1つだけ困ったことがあり、解決していないので書き残しておく。このウェブサイトでは記事の投稿時刻と更新時刻に元となる markdown ファイルの git のコミット履歴を利用している。このせいで、記事のフォルダを移動したり名前を変更すると、すべての記事の更新時刻が更新されてしまう。今回は markdown ファイルの場所は現状維持で乗り切ったけど、あまりこういう縛りを作りたくない。どうにかしたいけどあまり良い方法が思い浮かばないのでいったん忘れることにする。&lt;/p&gt;
+&lt;p&gt;preact-render-to-string での XML 出力をいろいろ試していたときにバグっぽい挙動を見つけたので &lt;a href=&quot;https://github.com/preactjs/preact-render-to-string/pull/174&quot;&gt;Pull Request&lt;/a&gt; を出した。&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title type="html">node-mysql2 モジュールと Amazon RDS の証明書</title>
+    <title type="text">node-mysql2 モジュールと Amazon RDS の証明書</title>
     <id>https://clomie.dev/posts/20201027-rds-tls-certificate</id>
-    <link href="https://clomie.dev/posts/20201027-rds-tls-certificate" />
-    <updated>2020-10-27T13:16:17.000Z</updated>
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20201027-rds-tls-certificate" />
+    <published>2020-10-27T13:16:17.000Z</published>
+    <updated>2020-10-31T03:49:19.000Z</updated>
+    <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/sidorares/node-mysql2&quot;&gt;node-mysql2&lt;/a&gt; モジュールに RDS の証明書が組み込まれていて驚いた話。&lt;/p&gt;
+&lt;p&gt;さいきん仕事で Lambda から RDS(Aurora/MySQL) を使うアプリを書いている。IAM 認証を使っていて、DB 接続には SSL/TLS 証明書が必要なのだけど、普段書いている Node.js の場合は証明書の存在をそこまで気にすることがなかった。&lt;/p&gt;
+&lt;p&gt;Node.js の RDS に接続するコードはいつもこんな感じ。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const connectionConfig = {
+    host,
+    user,
+    database,
+    ssl: 'Amazon RDS',
+    authPlugins: { mysql_clear_password: () =&gt; () =&gt; authToken }
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;おそらく &lt;code&gt;ssl: 'Amazon RDS'&lt;/code&gt; の部分で指定した名前の SSL 証明書が Lambda の Node.js コンテナランタイムにプリインストールされた中から良い感じに選択されているのだろう、なんて特に根拠もなく都合の良い解釈をしていた。RDS Proxy の場合は直接 RDS に接続する場合と必要な証明書が違うので、実際に使われている証明書がどこにある何なのかを調べてみようとしたこともあったけど、動かしたら動いてしまったのもあり、そのうち忘れてしまっていた。&lt;/p&gt;
+&lt;p&gt;ところが Python や Golang で同じく RDS に SSL/TLS で接続しようとすると、証明書をファイルとしてビルド時にアーカイブに含めたり、ソースコードに埋め込む必要が出てきたりする。&lt;/p&gt;
+&lt;p&gt;Node.js だけ証明書が必要ないのは何故か気になって改めて調べてみると、node-mysql2 モジュールに証明書そのものが組み込まれていることがわかった。node-mysql2 モジュールはあくまで MySQL ドライバだと思っていたので、これは意外に感じる。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/sidorares/node-mysql2/blob/v2.2.5/lib/constants/ssl_profiles.js&quot;&gt;https://github.com/sidorares/node-mysql2/blob/v2.2.5/lib/constants/ssl_profiles.js&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;RDS の証明書は去年から今年のはじめにかけてローテーションがあって、それまで使われていた証明書が使えなくなっている。5年周期のようなので次は2024年だけど、その際は証明書の更新ではなくモジュールそのものを更新することになるのだろう。&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title type="html">デスクマット</title>
+    <title type="text">デスクマット</title>
     <id>https://clomie.dev/posts/20201026-deskmat</id>
-    <link href="https://clomie.dev/posts/20201026-deskmat" />
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20201026-deskmat" />
+    <published>2020-10-26T13:11:27.000Z</published>
     <updated>2020-10-26T13:11:27.000Z</updated>
+    <content type="html">&lt;p&gt;NovelKeys から Milkshake のデスクマットが届いた。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/20201026-deskmat.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;この間、朝起きたら NovelKeys から Restock update のメールが届いていて、Milkshake のデスクマットがあったので買ってしまった。&lt;/p&gt;
+&lt;p&gt;これまでは SteelSeries の QcK mass マウスパッドを使っていた。それに比べると布目は少し粗めだけど、厚みはちゃんとあるし、縁の縫製もしっかりしている。大きさは 90cm×40cm で Reddit とかで見る写真から想像していたより一回り小さかったけど、どちらかというと自分の作ったキーボードがよくある 60% キーボードより一回り大きいのだった。&lt;/p&gt;
+&lt;p&gt;机の上に直に置くよりもキーボードの打鍵感というか、指に返ってくる反動が少し柔らかくなったような気がする。スマホが机の上で鳴るとびっくりしてしまうので自然とマウスパッドの上に置いておく癖がついてしまっているのだけど、キーボード周辺に置けばよくなったのでマウスを動かしていてスマホが邪魔にならなくなった。&lt;/p&gt;
+&lt;p&gt;そういえば開封してすぐはクッキーと煎餅の中間みたいな甘い匂いがしていたけど、午後になったら消えてしまった。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;ウェブサイトのリンク色がどうも気に入らなかったので設定した。色はまた変えるかもしれない。&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title type="html">五反田と品川</title>
+    <title type="text">五反田と品川</title>
     <id>https://clomie.dev/posts/20201025-gotanda-shinagawa</id>
-    <link href="https://clomie.dev/posts/20201025-gotanda-shinagawa" />
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20201025-gotanda-shinagawa" />
+    <published>2020-10-25T12:29:33.000Z</published>
     <updated>2020-10-25T12:29:33.000Z</updated>
+    <content type="html">&lt;p&gt;この間実家に帰ったときに母方の大叔母と叔母姉妹の以前住んでいた家が大きかった話をして、なんとなく行ってみたくなって行ってきた。&lt;/p&gt;
+&lt;p&gt;五反田にあるのだけど、山が多くて土地の起伏が激しい。当時の家のあった土地には、今はまるごと6階建てのマンションになっていた。&lt;/p&gt;
+&lt;p&gt;少し歩いたところに池田山公園がある。当時はパンくずを持って鯉に餌やりに行っていたのを覚えている。今はさすがに餌やり禁止の看板があった。かなり坂の多い、というか山を登るように公園があるのだけど、高低差があるので高台に登るととても景色が良い。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/20201026-ikedayama.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;緑が多くて歩くのに良い場所だった。もう少し秋が深まっていればきっと紅葉がきれいだったと思う。天気も良くて散歩日和だった。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;午後はアクアパーク品川に行った。&lt;/p&gt;
+&lt;p&gt;ここ数ヶ月で、すみだ水族館、葛西臨海水族園と行ってきたのだけど、アクアパーク品川は他に比べてずいぶん鮮やかな色の魚を多く展示していた。イルカショーも見た。思っていたよりずっと見ていられる水族館だった。&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title type="html">ルーターのファームウェア、庭の芝刈り</title>
+    <title type="text">ルーターのファームウェア、庭の芝刈り</title>
     <id>https://clomie.dev/posts/20201024-router-firmware</id>
-    <link href="https://clomie.dev/posts/20201024-router-firmware" />
-    <updated>2020-10-24T01:20:03.000Z</updated>
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20201024-router-firmware" />
+    <published>2020-10-24T01:20:03.000Z</published>
+    <updated>2020-10-24T08:00:46.000Z</updated>
+    <content type="html">&lt;p&gt;午前中はインターネットに繋がらなくなって、無線 LAN ルーターを再起動したりしていた。原因は ONU の電源が抜けかかっていただけだった。ねこの仕業と思われる。&lt;/p&gt;
+&lt;p&gt;ついでに無線 LAN の設定でも見直すかと思って久々に設定画面にログインした。ファームウェアバージョンをみると3年ほど前のバージョンで、今年の7月に新しいバージョンが出ていたので更新した。普段何事もなければルーターにアクセスしないのでしばらくアップデートしていなかった。&lt;/p&gt;
+&lt;p&gt;セカンダリ SSID を有効にしてみた。今年に入って家で仕事をするようになってから、個人用と仕事用の端末で使っているネットワークを共有することになんとなく抵抗があったので。設定すれば分離できるのはわかってたけどなんとなく後回しにしていた。家庭用のルーターなので大した設定はできないけど、WAN とだけ繋がるようになったのでこれで十分。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;午後は庭の芝を刈った。10月も下旬になってきたので今年最後の芝刈り。たぶん次回は来年の5月の連休頃だと思う。&lt;/p&gt;
+&lt;p&gt;最近、庭仕事をするときの BGM には LOVE PSYCHEDELICO が最適なことを発見した。時間を忘れて作業に没頭できて良い。&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title type="html">USBケーブルを作った</title>
+    <title type="text">USBケーブルを作った</title>
     <id>https://clomie.dev/posts/20201023-cable</id>
-    <link href="https://clomie.dev/posts/20201023-cable" />
-    <updated>2020-10-23T14:34:11.000Z</updated>
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20201023-cable" />
+    <published>2020-10-23T14:34:11.000Z</published>
+    <updated>2020-10-23T15:00:19.000Z</updated>
+    <content type="html">&lt;p&gt;昨夜急にやる気になってコネクタ類をはんだ付けして完成。週末でもないのに夜ふかししてしまった。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/20201023-cable.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;今回は MDPC-X の透明スリーブを使ってみた。どちらかというと半透明という感じで、Techflex のクリアよりマットな仕上がり。コネクタに使った WEIPU SF12 は Aviator より見た目が良いけど、はんだ付けがしんどい。ツールクリッパーを買うべきかもしれない。&lt;/p&gt;
+&lt;p&gt;ヒートガンの使い心地は概ね満足で、ドライヤーと違って温度が高いので熱収縮チューブの収縮が早くてずいぶん楽になった。けど油断するとすぐスリーブが溶ける。&lt;/p&gt;
+&lt;p&gt;ケーブルマウント Type-C コネクタはあまり見かけないのだけど、千石電商の店頭に8ピンのが売っていたのでそれを使った。キーボード用なら USB 3.1 である必要はないし、端子間が狭いとはんだ付けで気を使うので、本当は USB 2.0 の4ピンタイプがほしいのだけど意外と売っていない。AliExpress とかでなら見つかるのだけど。&lt;/p&gt;
+&lt;p&gt;コイル部分は逆巻きを試したけど、巻きが強すぎてコイル部分が歪になってしまってやめた。ところがしばらく経ってから元に戻したら逆巻き前よりもコイルの巻が良い感じになった……ような気がする。結果的には良かったのかもしれない。&lt;/p&gt;
+&lt;p&gt;とりあえず今日1日使ってみて特に不具合もないので、スリーブがちょっと溶けた以外は成功したと思う。自作ケーブルのいろいろは &lt;a href=&quot;https://scrapbox.io/clomie/%E8%87%AA%E4%BD%9C%E3%82%B1%E3%83%BC%E3%83%96%E3%83%AB&quot;&gt;Scrapbox&lt;/a&gt; の方にまとめておくことにした。&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title type="html">石油ファンヒーター</title>
+    <title type="text">石油ファンヒーター</title>
     <id>https://clomie.dev/posts/20201021-fanheater</id>
-    <link href="https://clomie.dev/posts/20201021-fanheater" />
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20201021-fanheater" />
+    <published>2020-10-21T13:24:37.000Z</published>
     <updated>2020-10-21T13:24:37.000Z</updated>
+    <content type="html">&lt;p&gt;今週は暖かい日が多いものの、近頃冷える日も多くなってきたので石油ファンヒーターを買い足した。&lt;/p&gt;
+&lt;p&gt;去年までは日中は職場にいたし帰宅後に自室で過ごすこともほとんどなく、今年の春先は居間で仕事をしていたので、自室の暖房はエアコンしかない。エアコンの暖房機能はあってないようなものだと思っているので、これから冬を迎えるにあたり必要だった。&lt;/p&gt;
+&lt;p&gt;自室用のファンヒーターはダイニチの FW-3219S を買った。実家の頃からほとんどダイニチを買っている。居間の12畳用のモデルが見慣れていたせいか、届いてみると思っていたより小さくてかわいい。妻がファンヒーター用のキャスターを買って設置していた。掃除がしやすくなるやつ。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;以前 @nuxt/content にライブ編集の IME 制御の修正 PR を投げていたけど、先週マージされたバージョンがリリースされていたので取り込んだ。変換候補を Tab キーで選んでもカーソルが飛ばなくなったので、これもライブ編集機能で書いている。&lt;/p&gt;
+&lt;p&gt;この間まで VSCode で書いていたけど、日記は背景が白いほうが書いているときの気分に合っているかもしれない。&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title type="html">USB ケーブルのコネクタ</title>
+    <title type="text">USB ケーブルのコネクタ</title>
     <id>https://clomie.dev/posts/20201013-connector</id>
-    <link href="https://clomie.dev/posts/20201013-connector" />
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20201013-connector" />
+    <published>2020-10-13T13:45:22.000Z</published>
     <updated>2020-10-13T13:45:22.000Z</updated>
+    <content type="html">&lt;p&gt;USB ケーブルのパーツを少しずつ揃えていて、比較的安価で雰囲気の良さそうなコネクタをいくつか買ってみた。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/20201013-connector-1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;ケーブルは8月に自作したもので、繋がっているコネクタは海外のカスタム USB ケーブルショップなどでは aviator だったり GX16 などの型番で売っているもの。日本でもマイクコネクタ、メタルコネクタ、メタルコンセント、丸型コネクタなどで探せば見つかる。安ければプラグ・ソケット合わせて600円ぐらい。秋葉原に行けばマルツや、ラジオデパートの門田無線などで手に入る。&lt;/p&gt;
+&lt;p&gt;右側は Weipu というメーカーの SF12 コネクタ。14ドルぐらい。aviator はネジ式の接続なのに対して、これはプッシュプル式の接続になっていて着脱が簡単なのが良いところ。見た目も良い。これは真鍮製らしいが、別型番でアルマイト加工のアルミ製のものもあるっぽい。&lt;/p&gt;
+&lt;p&gt;左側は SZRICO というメーカーの 1B コネクタ。13ドルぐらい。同じくプッシュプル式。他に比べてスリム。買ったときはもっと太いと思っていた。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/20201013-connector-2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;中の端子のはんだ付け側。本当はドレンワイヤを通すのに5ピン必要なのかもしれないが、正しく処理する方法がいまいちわかっていないので4ピンで揃えている。&lt;/p&gt;
+&lt;p&gt;aviator は端子の間に壁があるので、何も気にせずはんだ付けしてもショートする心配がなさそうな作り。Weipu も端子同士はそれなりに離れているけど、ケーブルの銅線部分が余ったりすると隣の端子に当たるかもしれない。作るときは端子ごとに熱収縮チューブを着けたほうが良さそう。&lt;/p&gt;
+&lt;p&gt;昨日からやっている amazon prime セールで安いヒートガンを買ったので、工具も揃いつつある。週末は雨だそうなので、作るのにはちょうど良いタイミングかもしれない。&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title type="html">庭の草むしりをした</title>
+    <title type="text">庭の草むしりをした</title>
     <id>https://clomie.dev/posts/20201003-gardening</id>
-    <link href="https://clomie.dev/posts/20201003-gardening" />
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20201003-gardening" />
+    <published>2020-10-03T13:12:20.000Z</published>
     <updated>2020-10-03T13:12:20.000Z</updated>
+    <content type="html">&lt;p&gt;自宅の庭の草むしりをした。2時間ぐらいかけて45Lのポリ袋2つ分ぐらいにはなった。&lt;/p&gt;
+&lt;p&gt;庭は自宅とお向かいさんと隣のマンションにコの字型に囲まれている。陽当りの良くない奥側は背の高いねこじゃらしだらけで、もはや芝生というより空き地のようになってしまっていた。意外にも陽当たりの良いところは芝がちゃんと生えていて、陽当たりがいまいちなところに雑草が多い。たぶん陽当たりが良いと芝生の育ちが良くて雑草が根付く隙間があまりないのだろうと思う。&lt;/p&gt;
+&lt;p&gt;我が家には実家からもらった庭用バリカンがあり、今年の5月にそれで3日かけて芝刈りをしたのだけど、夏を越えたら雑草だらけになってしまった。芝生の手入れなんて何もわからず適当に短くしてしまったので、土が見えすぎて隙だらけになってしまったのかもしれない。&lt;/p&gt;
+&lt;p&gt;やっぱり根っこから抜かないとだめだというのがわかったので、今日はバリカンを使わずに手でむしった。最初は丁寧に根っこを探して抜いていたけど、さすがにそれでは日が暮れてしまいそうだったので適当にバリバリむしった。芝生用の除草剤でも買ってきたほうが良いかもしれない。&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title type="html">サイトのレイアウト、モニタの使い勝手</title>
+    <title type="text">サイトのレイアウト、モニタの使い勝手</title>
     <id>https://clomie.dev/posts/20201002-authorizer</id>
-    <link href="https://clomie.dev/posts/20201002-authorizer" />
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20201002-authorizer" />
+    <published>2020-10-02T15:16:07.000Z</published>
     <updated>2020-10-02T15:16:07.000Z</updated>
+    <content type="html">&lt;p&gt;ウェブサイトのレイアウトを少し変えた。それから About ページを追加した。とりあえずこれで文責は示したのでウェブサイトの体は成せたと思う。&lt;/p&gt;
+&lt;p&gt;Twitter のプロフィールに、このウェブサイトへのリンクを設定した。自分のプロフィールに貼るリンクが自分のドメインであるのは気分が良い。&lt;/p&gt;
+&lt;p&gt;あとはOGPを設定しようと思う。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;この間買ったモニタに仕事用の MacBook Pro とデスクトップの Windows を両方繋いでいるのだけど、Mac がスリープすると Windows に勝手に切り替わってしまうのがいまいち使い勝手が悪い。&lt;/p&gt;
+&lt;p&gt;Mac をモニタからの Type-C ケーブルで給電しているのだけど、ディスプレイの電源を切ると給電も止まってしまうのも盲点だった。考えてみればどちらも当たり前なのだけど、こういうことは使ってみないと気付かない。&lt;/p&gt;
+&lt;p&gt;Windows 本体の電源ボタンでディスプレイの電源を切れるようにした。モニタへの入力がなくなってモニタ自体がスリープになれば給電が止まることもなかった。それでひとまず解決したことにした。&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title type="html">フィード、@nuxt/content のライブ編集</title>
+    <title type="text">フィード、@nuxt/content のライブ編集</title>
     <id>https://clomie.dev/posts/20200927-editor-feed</id>
-    <link href="https://clomie.dev/posts/20200927-editor-feed" />
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20200927-editor-feed" />
+    <published>2020-09-27T15:38:50.000Z</published>
     <updated>2020-09-27T15:38:50.000Z</updated>
+    <content type="html">&lt;p&gt;ウェブサイトに RSS 用の Atom フィードを設置した。 @nuxtjs/feed を使えば簡単だった。いつも思うけど Atom と RSS2.0 はどっちで公開するのが良いのだろうか。両方あれば良いのだろうとは思うが、片方だけでどういうときに困るかがあまり思いつかない。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;@nuxt/content のライブ編集が体験が良いと書いておきながら、IME の変換候補を Tab キーで選択すると変な挙動をするのに気づいたので使っていなかった。自分が IME の変換候補を Tab キーで選択していることに初めて気づいた。&lt;/p&gt;
+&lt;p&gt;修正できないかと思って調べたところ IME を使った文字編集には &lt;a href=&quot;https://developer.mozilla.org/ja/docs/Web/API/Element/compositionstart_event&quot;&gt;compositionStart&lt;/a&gt;などのイベントが発生するようだった。このイベントを使って確定するまでは Tab キーのハンドリングをしないように修正して Pull Request を投げてみた。&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title type="html">投稿時刻を直した</title>
+    <title type="text">投稿時刻を直した</title>
     <id>https://clomie.dev/posts/20200926-timestamps</id>
-    <link href="https://clomie.dev/posts/20200926-timestamps" />
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20200926-timestamps" />
+    <published>2020-09-26T14:56:38.000Z</published>
     <updated>2020-09-26T14:56:38.000Z</updated>
+    <content type="html">&lt;p&gt;昨日2つめのエントリを公開してから気づいたのだけど、投稿時刻がズレてしまっていたのを直した。&lt;/p&gt;
+&lt;p&gt;投稿時刻には @nuxt/content の document プロパティの createdAt を使っていて、これは単にファイルの作成時刻が反映されている。このウェブサイトは Github Action でビルドしていて、毎回 &lt;code&gt;git clone&lt;/code&gt; されている。git はファイルの作成時刻を復元しないので、全エントリの投稿時刻がビルド時間になってしまった。&lt;/p&gt;
+&lt;p&gt;@nuxt/content の &lt;code&gt;content:file:beforeInsert&lt;/code&gt; フックで git のコミット時刻を createdAt, updatedAt に&lt;a href=&quot;https://github.com/clomie/clomie.dev/commit/9e62e363fa1035d8f5db1474014d068f1ab8323f&quot;&gt;反映するようにした&lt;/a&gt;。Github Actions の actions/checkout はデフォルトで shallow clone なので、そのままだと最新のコミットログしか拾えないので &lt;code&gt;fetch-depth: 0&lt;/code&gt; を設定して deep clone に&lt;a href=&quot;https://github.com/clomie/clomie.dev/commit/66b6afa446d6ac8fa673c10ac443be790ca0e115&quot;&gt;変更した&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;他に思いついてやめた直し方を書き残しておく。markdown の front-matter に投稿時刻を入れるのがシンプルかなと思ったけど、時間や更新時刻のことを考えると面倒に感じてやめた。シェルスクリプトで touch コマンド使ってファイルのタイムスタンプをいじることも考えたけど、ファイル作成時刻は変更できないようだ。&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title type="html">PCモニタを買った</title>
+    <title type="text">PCモニタを買った</title>
     <id>https://clomie.dev/posts/20200925-monitor</id>
-    <link href="https://clomie.dev/posts/20200925-monitor" />
-    <updated>2020-09-25T15:06:12.000Z</updated>
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20200925-monitor" />
+    <published>2020-09-25T15:06:12.000Z</published>
+    <updated>2020-09-30T14:57:58.000Z</updated>
+    <content type="html">&lt;p&gt;春先にリモートワークになってからPCモニタを買い換えようと思ってしばらくチェックしていた。買い物が苦手で踏ん切りがつかず、どれを買うか悩みながら機が熟すのを待っていた。連休明けに妻のモニタが不調になったので、自分の使っていたモニタを譲って BenQ の &lt;a href=&quot;https://www.amazon.co.jp/dp/B08C9SZP4T/&quot;&gt;PD2705Q&lt;/a&gt; を買った。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/20200925-monitor-1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;27インチ WQHD、USB Type-C PD 対応、USB ハブ、KVM 付きでまともな色が出そうなやつを条件に探していた。仕事用の MacBook Pro から Type-C ケーブル1本だけでつながって AC アダプタもいらないし、キーボードとマウスの接続もまかなえるのでケーブルの配線がすっきりした。HDMI で Windows にも繋いでいて、入力切り替えるだけでキーボードとマウスも一緒についてきて便利。&lt;/p&gt;
+&lt;p&gt;ディスプレイの端がちょっと暗いのが気になるけど、サイズが大きい割にアームで吊って近めに置いているので視野角的な限界がありそう。画面モードにM-bookモードなんてのも用意されていたけど、結局自分で色温度を調整して良い感じになった。多機能で新しめな機種の割には値段も抑えめなので、概ね満足している。&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title type="html">ウェブサイトを作った</title>
+    <title type="text">ウェブサイトを作った</title>
     <id>https://clomie.dev/posts/20200925-create-website</id>
-    <link href="https://clomie.dev/posts/20200925-create-website" />
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20200925-create-website" />
+    <published>2020-09-25T05:41:01.000Z</published>
     <updated>2020-09-25T05:41:01.000Z</updated>
+    <content type="html">&lt;p&gt;このウェブサイトを作った。&lt;/p&gt;
+&lt;p&gt;少し前まで書きものは Qiita を使っていたけど個人的な日記を書く場所ではないし、試しに Scrapbox をブログ的に使ってみたけど、リンクが多い行に移動するとカーソルを見失うことがあって長い文章は書きづらかった。&lt;/p&gt;
+&lt;p&gt;仕事で主に Web サービスを作っているのに、自前でサイトの1つも運用したことがないというのも少し思うところがあって作ることにした。&lt;/p&gt;
+&lt;p&gt;コンテンツは Nuxt.js + @nuxt/content で作って、GitHub Pages でホスティングしてみている。ドメインは Google Domains で取った。こういう決め手に欠けるものを選ぶのがすごく苦手で半日ぐらい悩んだ。&lt;/p&gt;
+&lt;p&gt;ページのシンプルさに対して Nuxt.js は少し大げさかなと思うけど、ページさえ作れば @nuxt/content のライブ編集機能で markdown が開発者モードのページ上で編集できるのがとても体験が良いのでしばらくこのままになりそう。&lt;/p&gt;
+&lt;p&gt;ホスティング部分はもう少し自前でやりたい。いずれにしても始めるのに時間をかけると途中で放置してしまいそうなのでもう少しゆっくりやることにする。&lt;/p&gt;</content>
   </entry>
 </feed>
