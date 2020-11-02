@@ -1,4 +1,4 @@
-import { h, VNode } from 'preact'
+import { Fragment, h, VNode } from 'preact'
 import { DOMAIN, URL_PREFIX } from '../env'
 
 type Props = {
@@ -6,6 +6,7 @@ type Props = {
   type: 'website' | 'article'
   title?: string
   image?: string
+  summary?: string
   children?: VNode[] | VNode
 }
 
@@ -14,6 +15,7 @@ export const DefaultLayout = ({
   type,
   title,
   image,
+  summary,
   children,
 }: Props) => {
   const ogImage = URL_PREFIX + (image || '/images/clomie.png')
@@ -26,6 +28,12 @@ export const DefaultLayout = ({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {summary && (
+          <Fragment>
+            <meta property="description" content={summary} />
+            <meta property="og:description" content={summary} />
+          </Fragment>
+        )}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:type" content={type} />
         <meta property="og:url" content={ogUrl} />

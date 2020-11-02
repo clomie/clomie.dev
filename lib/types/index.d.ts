@@ -5,6 +5,7 @@ declare type Post = {
   updatedAt: Date
   body: string
   image?: string
+  summary: string
 }
 
 declare type PageProps<T = {}> = { path: string } & T

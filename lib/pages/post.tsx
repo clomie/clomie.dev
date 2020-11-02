@@ -3,9 +3,15 @@ import { FormattedTime } from '../components/FormattedTime'
 import { DefaultLayout } from '../layouts/DefaultLayout'
 
 export const PostPage = ({ path, post }: PageProps<{ post: Post }>) => {
-  const { title, updatedAt, createdAt, body, image } = post
+  const { title, updatedAt, createdAt, body, image, summary } = post
   return (
-    <DefaultLayout path={path} type="article" title={title} image={image}>
+    <DefaultLayout
+      path={path}
+      type="article"
+      title={title}
+      image={image}
+      summary={summary}
+    >
       <main>
         <article>
           <h1>{title}</h1>

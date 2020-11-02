@@ -1,11 +1,11 @@
 import { execSync } from 'child_process'
 import { readFileSync } from 'fs'
 import matter from 'gray-matter'
+import { JSDOM } from 'jsdom'
 import stringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remark2rehype from 'remark-rehype'
 import unified from 'unified'
-import { JSDOM } from 'jsdom'
 
 const readTimestamps = (path: string) => {
   const cmd = `git --no-pager log --no-color --pretty=format:'%ad' -- ${path}`
@@ -35,18 +35,27 @@ const parseMarkdownWithFrontMatter = (path: string) => {
   return { frontmatter, body }
 }
 
-const findImage = (body: string): string | undefined => {
-  const { document } = new JSDOM(body).window
+const findImage = (document: Document): string | undefined => {
   const img = document.querySelector('img')
   return (img && img.src) || undefined
+}
+
+const findSummary = (document: Document): string => {
+  const text = document.querySelector('p')?.textContent || ''
+  return text.replace(/(?<=。).+/, '')
 }
 
 export const parseMarkdown = (path: string): Omit<Post, 'path'> => {
   const { createdAt, updatedAt } = readTimestamps(path)
   const { frontmatter, body } = parseMarkdownWithFrontMatter(path)
 
-  const image = findImage(body)
+  const { document } = new JSDOM(body).window
+
+  const image = findImage(document)
+  const summary = findSummary(document)
   const { title } = frontmatter
+
+  console.log({ path, summary })
 
   return {
     title,
@@ -54,5 +63,6 @@ export const parseMarkdown = (path: string): Omit<Post, 'path'> => {
     updatedAt,
     body,
     image,
+    summary,
   }
 }
