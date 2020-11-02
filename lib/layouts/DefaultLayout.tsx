@@ -37,9 +37,9 @@ export const DefaultLayout = ({
       </head>
       <body>
         <header>
-          <h1>
-            <a href="/">{DOMAIN}</a>
-          </h1>
+          <a class="site-title" href="/">
+            {DOMAIN}
+          </a>
           <nav>
             <a href="/about">About</a>
             <a href="/feed.xml">Feed</a>
