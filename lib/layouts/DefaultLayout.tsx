@@ -1,4 +1,5 @@
 import { h, VNode } from 'preact'
+import { DOMAIN, URL_PREFIX } from '../env'
 
 type Props = {
   path: string
@@ -15,9 +16,6 @@ export const DefaultLayout = ({
   image,
   children,
 }: Props) => {
-  const DOMAIN = 'clomie.dev'
-  const URL_PREFIX = 'https://' + DOMAIN
-
   const ogImage = URL_PREFIX + (image || '/images/clomie.png')
   const ogUrl = URL_PREFIX + path
   const pageTitle = (title ? title + ' - ' : '') + DOMAIN
