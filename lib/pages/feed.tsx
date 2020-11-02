@@ -10,25 +10,32 @@ declare module 'preact' {
   }
 }
 
-const Entry = ({ path, title, createdAt }: Post) => {
+const Entry = ({ path, title, createdAt, updatedAt, body }: Post) => {
   const link = URL_PREFIX + path
   return (
     <entry>
-      <title type="html">{title}</title>
+      <title type="text">{title}</title>
       <id>{link}</id>
-      <link href={link} />
-      <updated>{createdAt.toISOString()}</updated>
+      <link rel="alternate" type="text/html" href={link} />
+      <published>{createdAt.toISOString()}</published>
+      <updated>{updatedAt.toISOString()}</updated>
+      <content type="html">{body}</content>
     </entry>
   )
 }
 
-export const FeedPage = ({ posts }: PageProps<{ posts: Post[] }>) => {
+export const FeedPage = ({ path, posts }: PageProps<{ posts: Post[] }>) => {
+  const indexUrl = URL_PREFIX + '/'
   return (
     <feed xmlns="http://www.w3.org/2005/Atom">
-      <id>{URL_PREFIX}</id>
-      <title>{DOMAIN}</title>
+      <title type="text">{DOMAIN}</title>
       <updated>{new Date().toISOString()}</updated>
-      <link rel="alternate" href={URL_PREFIX} />
+      <id>{indexUrl}</id>
+      <link rel="alternate" href={indexUrl} />
+      <link rel="self" type="application/atom+xml" href={URL_PREFIX + path} />
+      <author>
+        <name>clomie</name>
+      </author>
       {posts.map((post) => (
         <Entry {...post} />
       ))}
