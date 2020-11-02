@@ -44,7 +44,9 @@ main {
   line-height: 2;
 }
 
-main h1 {
+main h1,
+main h2,
+main h3 {
   color: #444;
   margin: 0;
 }
