@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">clomie.dev</title>
-  <updated>2020-11-11T15:14:50.566Z</updated>
+  <updated>2020-11-11T15:16:08.473Z</updated>
   <id>https://clomie.dev/</id>
   <link rel="alternate" href="https://clomie.dev/" />
   <link rel="self" type="application/atom+xml" href="https://clomie.dev/feed.xml" />
   <author>
     <name>clomie</name>
   </author>
+  <entry>
+    <title type="text">linjar</title>
+    <id>https://clomie.dev/posts/20201108-jsx-renderer-linjar</id>
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20201108-jsx-renderer-linjar" />
+    <published>2020-11-11T15:15:31.000Z</published>
+    <updated>2020-11-11T15:15:31.000Z</updated>
+    <content type="html">&lt;p&gt;JSX を HTML や XML を生成するテンプレートエンジンとして使うための npm モジュール &lt;a href=&quot;https://github.com/clomie/linjar&quot;&gt;linjar&lt;/a&gt; を作った。&lt;/p&gt;
+&lt;p&gt;先月末に &lt;a href=&quot;/posts/20201028-website-ssg&quot;&gt;ウェブサイトの実装を変えた&lt;/a&gt; でも書いたが、 &lt;a href=&quot;https://github.com/preactjs/preact&quot;&gt;preact&lt;/a&gt; と &lt;a href=&quot;https://github.com/preactjs/preact-render-to-string&quot;&gt;preact-render-to-string&lt;/a&gt; を使ってこのウェブサイトの HTML やフィードの XML を生成していた。&lt;/p&gt;
+&lt;p&gt;preact は十分小さいライブラリだと思うけど、ただのテンプレートエンジンとして使うだけなら diff などの仮想 DOM としての機能やライフサイクルフックは不要になる。最初からテンプレートエンジンとして作るならもっと削れるはず、というのが主な動機になっている。&lt;/p&gt;
+&lt;p&gt;実装は preact をもちろん参考にしたが、 &lt;code&gt;h&lt;/code&gt; 関数で &lt;code&gt;VNode&lt;/code&gt; を作るところまでの型定義は少し悩ましい部分が多かった。この部分は &lt;a href=&quot;https://github.com/syumai/deno-libs/blob/master/jsx/renderer.ts&quot;&gt;Deno 向けの JSX Renderer の実装&lt;/a&gt;がとても参考になった。&lt;/p&gt;
+&lt;p&gt;最低限必要な機能はひと通り実装した。 1.0.0 を publish してから実際に使ってみたら少しバグっていて、既に2回もパッチバージョンを上げてしまった。最初は 0.0.x でリリースすれば良かったかもしれない。&lt;/p&gt;
+&lt;p&gt;npm モジュールを作るのは初めてだったけど、ハードルがとても低い。ライブラリ名さえ決まれば、 npmjs.com にアカウントを作って &lt;code&gt;npm publish&lt;/code&gt; コマンドを打てばすぐに公開できてしまう。公開にあたっては &lt;a href=&quot;https://numb86-tech.hatenablog.com/entry/2019/06/28/220736&quot;&gt;TypeScript で npm パッケージを作る - 30歳からのプログラミング&lt;/a&gt; がとても参考になった。&lt;/p&gt;
+&lt;p&gt;既にこのウェブサイトの生成も linjar を使った実装に置き換えたので、あとはドッグフーディングしながらやっていきたい。とりあえず ES Modules 周りを雰囲気で使っているので、これを機にちゃんと理解したいと思っている。&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title type="text">障子紙の張り替え</title>
     <id>https://clomie.dev/posts/20201104-repapering-shoji</id>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="description" content="JSX を HTML や XML を生成するテンプレートエンジンとして使うための npm モジュール linjar を作った。" />
+    <meta property="og:description" content="JSX を HTML や XML を生成するテンプレートエンジンとして使うための npm モジュール linjar を作った。" />
+    <meta property="og:title" content="linjar - clomie.dev" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://clomie.dev/posts/20201108-jsx-renderer-linjar" />
+    <meta property="og:image" content="https://clomie.dev/images/clomie.png" />
+    <meta property="twitter:card" content="summary" />
+    <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+    <title>linjar - clomie.dev</title>
+  </head>
+  <body>
+    <header>
+      <a class="site-title" href="/">clomie.dev</a>
+      <nav><a href="/about">About</a><a href="/feed.xml">Feed</a></nav>
+    </header>
+    <main>
+      <article>
+        <h1>linjar</h1>
+        <div class="timestamp"><time datetime="2020-11-12T00:15:31+09:00">2020/11/12 00:15</time></div>
+        <div>
+          <p>JSX を HTML や XML を生成するテンプレートエンジンとして使うための npm モジュール <a href="https://github.com/clomie/linjar">linjar</a> を作った。</p>
+          <p>先月末に <a href="/posts/20201028-website-ssg">ウェブサイトの実装を変えた</a> でも書いたが、 <a href="https://github.com/preactjs/preact">preact</a> と <a href="https://github.com/preactjs/preact-render-to-string">preact-render-to-string</a> を使ってこのウェブサイトの HTML やフィードの XML を生成していた。</p>
+          <p>preact は十分小さいライブラリだと思うけど、ただのテンプレートエンジンとして使うだけなら diff などの仮想 DOM としての機能やライフサイクルフックは不要になる。最初からテンプレートエンジンとして作るならもっと削れるはず、というのが主な動機になっている。</p>
+          <p>実装は preact をもちろん参考にしたが、 <code>h</code> 関数で <code>VNode</code> を作るところまでの型定義は少し悩ましい部分が多かった。この部分は <a href="https://github.com/syumai/deno-libs/blob/master/jsx/renderer.ts">Deno 向けの JSX Renderer の実装</a>がとても参考になった。</p>
+          <p>最低限必要な機能はひと通り実装した。 1.0.0 を publish してから実際に使ってみたら少しバグっていて、既に2回もパッチバージョンを上げてしまった。最初は 0.0.x でリリースすれば良かったかもしれない。</p>
+          <p>npm モジュールを作るのは初めてだったけど、ハードルがとても低い。ライブラリ名さえ決まれば、 npmjs.com にアカウントを作って <code>npm publish</code> コマンドを打てばすぐに公開できてしまう。公開にあたっては <a href="https://numb86-tech.hatenablog.com/entry/2019/06/28/220736">TypeScript で npm パッケージを作る - 30歳からのプログラミング</a> がとても参考になった。</p>
+          <p>既にこのウェブサイトの生成も linjar を使った実装に置き換えたので、あとはドッグフーディングしながらやっていきたい。とりあえず ES Modules 周りを雰囲気で使っているので、これを機にちゃんと理解したいと思っている。</p>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
