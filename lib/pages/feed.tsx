@@ -1,14 +1,5 @@
-import { h } from 'preact'
-
+import { h } from 'linjar'
 import { DOMAIN, URL_PREFIX } from '../env'
-
-declare module 'preact' {
-  namespace createElement.JSX {
-    interface IntrinsicElements {
-      [key: string]: any
-    }
-  }
-}
 
 const Entry = ({ path, title, createdAt, updatedAt, body }: Post) => {
   const link = URL_PREFIX + path

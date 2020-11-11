@@ -1,4 +1,4 @@
-import { h } from 'preact'
+import { h } from 'linjar'
 import { FormattedTime } from '../components/FormattedTime'
 import { DefaultLayout } from '../layouts/DefaultLayout'
 

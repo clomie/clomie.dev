@@ -1,4 +1,4 @@
-import { Fragment, h } from 'preact'
+import { Fragment, h } from 'linjar'
 import { FormattedTime } from '../components/FormattedTime'
 import { DefaultLayout } from '../layouts/DefaultLayout'
 

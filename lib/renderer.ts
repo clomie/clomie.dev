@@ -1,8 +1,7 @@
 import '@prettier/plugin-xml'
 import { mkdirSync, writeFileSync } from 'fs'
 import { join, parse } from 'path'
-import { VNode } from 'preact'
-import renderToString from 'preact-render-to-string'
+import { render, VNode } from 'linjar'
 import { format, Options as PrettierOptions } from 'prettier'
 
 type Route<T> = {
@@ -60,7 +59,7 @@ export const renderer = (
   mkdirSync(parent, { recursive: true })
 
   const node = pageComponent({ path, ...pageProps })
-  const rendered = renderToString(node)
+  const rendered = render(node, { xml: outputPath.endsWith('.xml') })
   const prettified = prettify(declaration(outputPath) + rendered, outputPath)
 
   writeFileSync(outputPath, prettified)

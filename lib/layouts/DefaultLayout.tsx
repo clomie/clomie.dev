@@ -1,4 +1,4 @@
-import { Fragment, h, VNode } from 'preact'
+import { Fragment, h, VNode } from 'linjar'
 import { DOMAIN, URL_PREFIX } from '../env'
 
 type Props = {
