@@ -1,4 +1,4 @@
-import { h } from 'preact'
+import { h } from 'linjar'
 import { DefaultLayout } from '../layouts/DefaultLayout'
 
 export const AboutPage = ({ path }: PageProps) => {
