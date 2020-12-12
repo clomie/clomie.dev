@@ -18,16 +18,13 @@ export function route<T>(
   return { path, pageComponent, pageProps }
 }
 
-const calculatePaths = (outDir: string, path: string) => {
+const normalizePath = (path: string) => {
   const parsed = parse(path)
 
   const name = parsed.name || 'index'
   const ext = parsed.ext || '.html'
 
-  const parent = join(outDir, parsed.dir)
-  const outputPath = join(parent, name + ext)
-
-  return { parent, outputPath }
+  return join(parsed.dir, name + ext)
 }
 
 const declaration = (path: string) => {
@@ -50,19 +47,19 @@ const prettify = (body: string, path: string) => {
   return format(body, prettierOptions)
 }
 
-export const renderer = (
-  outDir: string,
-  { path, pageComponent, pageProps }: Route<any>
-) => {
-  const { parent, outputPath } = calculatePaths(outDir, path)
-
-  mkdirSync(parent, { recursive: true })
+export const renderer: (route: Route<any>) => ContentFile = ({
+  path,
+  pageComponent,
+  pageProps,
+}: Route<any>) => {
+  const normalizedPath = normalizePath(path)
 
   const node = pageComponent({ path, ...pageProps })
-  const rendered = render(node, { xml: outputPath.endsWith('.xml') })
-  const prettified = prettify(declaration(outputPath) + rendered, outputPath)
+  const rendered = render(node, { xml: normalizedPath.endsWith('.xml') })
+  const prettified = prettify(
+    declaration(normalizedPath) + rendered,
+    normalizedPath
+  )
 
-  writeFileSync(outputPath, prettified)
-
-  console.log(`Generated path: ${outputPath}`)
+  return { path: normalizedPath, content: prettified }
 }

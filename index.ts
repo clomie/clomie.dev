@@ -5,6 +5,8 @@ import { FeedPage } from './lib/pages/feed'
 import { PostPage } from './lib/pages/post'
 import { listPosts } from './lib/posts'
 import { renderer, route } from './lib/renderer'
+import { renderSitemap } from './lib/sitemap'
+import { writeContent } from './lib/writer'
 
 const outDir = './dist'
 const staticDir = './static'
@@ -24,7 +26,13 @@ const routes = [
   }),
   route('/feed.xml', FeedPage, { posts }),
 ]
-routes.forEach((route) => renderer(outDir, route))
+const files = routes.map((route) => renderer(route))
+
+// Output contents
+files.forEach((file) => {
+  const path = writeContent(outDir, file)
+  console.log(`Generated: ${path}`)
+})
 
 // Copy static files
 ;(async () => {

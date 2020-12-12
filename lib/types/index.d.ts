@@ -9,3 +9,8 @@ declare type Post = {
 }
 
 declare type PageProps<T = {}> = { path: string } & T
+
+declare type ContentFile = {
+  path: string
+  content: string
+}
