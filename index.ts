@@ -27,6 +27,7 @@ const routes = [
   route('/feed.xml', FeedPage, { posts }),
 ]
 const files = routes.map((route) => renderer(route))
+files.push(renderSitemap(posts.map(({ path }) => path)))
 
 // Output contents
 files.forEach((file) => {
