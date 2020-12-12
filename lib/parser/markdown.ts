@@ -55,8 +55,6 @@ export const parseMarkdown = (path: string): Omit<Post, 'path'> => {
   const summary = findSummary(document)
   const { title } = frontmatter
 
-  console.log({ path, summary })
-
   return {
     title,
     createdAt,
