@@ -22,6 +22,7 @@ export const DefaultLayout = ({
   const ogUrl = URL_PREFIX + path
   const pageTitle = (title ? title + ' - ' : '') + DOMAIN
   const twitterCard = image ? 'summary_large_image' : 'summary'
+  const searchLink = `https://www.google.com/search?q=site:${DOMAIN}`
 
   return (
     <html lang="ja">
@@ -50,6 +51,7 @@ export const DefaultLayout = ({
           </a>
           <nav>
             <a href="/about">About</a>
+            <a href={searchLink}>Search</a>
             <a href="/feed.xml">Feed</a>
           </nav>
         </header>
