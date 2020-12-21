@@ -28,7 +28,6 @@ header .site-title {
   margin: 0;
   font-size: 1.2rem;
   font-weight: normal;
-  color: #96b984;
 }
 
 header nav a {
@@ -52,7 +51,7 @@ main h3 {
 }
 
 a {
-  color: #82a274;
+  color: #50832c;
   text-decoration: none;
 }
 
