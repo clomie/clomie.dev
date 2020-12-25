@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">clomie.dev</title>
-  <updated>2020-12-22T16:13:30.191Z</updated>
+  <updated>2020-12-25T16:35:51.795Z</updated>
   <id>https://clomie.dev/</id>
   <link rel="alternate" href="https://clomie.dev/" />
   <link rel="self" type="application/atom+xml" href="https://clomie.dev/feed.xml" />
