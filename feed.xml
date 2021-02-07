@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">clomie.dev</title>
-  <updated>2021-02-05T23:21:02.414Z</updated>
+  <updated>2021-02-07T14:14:37.107Z</updated>
   <id>https://clomie.dev/</id>
   <link rel="alternate" href="https://clomie.dev/" />
   <link rel="self" type="application/atom+xml" href="https://clomie.dev/feed.xml" />
   <author>
     <name>clomie</name>
   </author>
+  <entry>
+    <title type="text">ロウバイ</title>
+    <id>https://clomie.dev/posts/20210207-wintersweet</id>
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20210207-wintersweet" />
+    <published>2021-02-07T14:14:02.000Z</published>
+    <updated>2021-02-07T14:14:02.000Z</updated>
+    <content type="html">&lt;p&gt;隣駅の少し大きいお寺まで、ロウバイを撮りに行った。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/20210207-wintersweet-1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;先週、外を歩いていて団地の生け垣にロウバイの花が咲いているのに気づいた。お寺にも咲いていたことを思い出し、久しぶりに足を向けてみることにした。&lt;/p&gt;
+&lt;p&gt;数年前にフィルムカメラにハマっていたとき、被写体を探してお寺まで散歩しに来て、たまたま咲いていたロウバイを撮った。そのとき通りがかった男性が花の名前も教えてくれた。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/20210207-wintersweet-2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;記憶ではもっとたくさん咲いていると思っていたが、数本あるだけだった。&lt;/p&gt;
+&lt;p&gt;地味だけど小さくてかわいい花だと思う。名前の通り蝋のように淡く透ける。太陽の光に透けると光って見える。今の時期なら15時ぐらいがちょうど良い。&lt;/p&gt;
+&lt;p&gt;木の根元には同じ花がたくさん転がっていた。散るときは花ごと落ちるようだ。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/20210207-wintersweet-3.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;カメラは、妻に PEN Lite(E-PL7) と LUMIX 25mm f1.7 を借りた。小さいし軽い。ダイヤルが少ないのと機能が多くて操作が少しまどろっこしいと感じるところがあったのだけど、最近少し慣れてきた。広角は Pixel 4a で撮った。スマホはすごい。&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title type="text">13歳からのアート思考</title>
     <id>https://clomie.dev/posts/20210130-artthinking</id>
