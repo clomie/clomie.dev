@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">clomie.dev</title>
-  <updated>2021-02-13T11:59:03.311Z</updated>
+  <updated>2021-02-14T15:32:42.317Z</updated>
   <id>https://clomie.dev/</id>
   <link rel="alternate" href="https://clomie.dev/" />
   <link rel="self" type="application/atom+xml" href="https://clomie.dev/feed.xml" />
   <author>
     <name>clomie</name>
   </author>
+  <entry>
+    <title type="text">husky v5</title>
+    <id>https://clomie.dev/posts/20210215-husky</id>
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20210215-husky" />
+    <published>2021-02-14T15:31:20.000Z</published>
+    <updated>2021-02-14T15:31:20.000Z</updated>
+    <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/typicode/husky&quot;&gt;husky&lt;/a&gt; が v5 にメジャーバージョンアップしたので、&lt;a href=&quot;https://github.com/clomie/linjar&quot;&gt;linjar&lt;/a&gt; の husky をアップデートした。&lt;/p&gt;
+&lt;p&gt;マイグレーション用のツールとして &lt;a href=&quot;https://github.com/typicode/husky-4-to-5&quot;&gt;husky-4-to-5&lt;/a&gt; が用意されている。&quot;Requires npm 7&quot; とあるが、npm 6 以前でも npx で特に何の問題もなく実行できた。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ npx github:typicode/husky-4-to-5 --package-manager npm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;実行すると husky v5 と &lt;a href=&quot;https://github.com/typicode/pinst&quot;&gt;pinst&lt;/a&gt; のインストールと、package.json の scripts セクション と husky v5 用のスクリプトファイルが自動構成された。設定ファイルは手直しが必要だった。&lt;/p&gt;
+&lt;p&gt;linjar の package.json には prepublishonly スクリプトが既に設定されていて、自動構成されなかったので手直しする必要があった。また、これまでの pre-commit フックは npm scripts のコンテキストで実行されていたが、husky v5 からはただのスクリプトになっている。&lt;/p&gt;
+&lt;p&gt;pinst は postinstall タスクを有効化・無効化するだけのモジュールだった。v5 以降で postinstall スクリプトが必要になったが、ライブラリパッケージの場合は package.json に設定があるとパッケージを使う側でも postinstall スクリプトが動いてしまう。これを回避するためのモジュールと理解した。&lt;/p&gt;
+&lt;p&gt;新しい husky はライブラリ依存がなくなって、作りもシンプルになっていた。 &lt;code&gt;husky install&lt;/code&gt; コマンドを実行すると、git の &lt;code&gt;core.hookspath&lt;/code&gt; 設定が husky 専用に作られたディレクトリに設定されて、専用の環境変数を扱うためのシェルスクリプトがコピーされる。あとはただ git hooks の機能で動くし、その時 husky が間で動くということもない。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;% git config --get core.hookspath
+.husky
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;マイグレーションしたコミットは&lt;a href=&quot;https://github.com/clomie/linjar/commit/e05514379f31aae04069ec689f57fdc35af6d7e9&quot;&gt;これ&lt;/a&gt;。&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title type="text">ジョギング</title>
     <id>https://clomie.dev/posts/20210212-jogging</id>

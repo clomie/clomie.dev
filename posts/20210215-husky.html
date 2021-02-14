@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="description" content="husky が v5 にメジャーバージョンアップしたので、linjar の husky をアップデートした。" />
+    <meta property="og:description" content="husky が v5 にメジャーバージョンアップしたので、linjar の husky をアップデートした。" />
+    <meta property="og:title" content="husky v5 - clomie.dev" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://clomie.dev/posts/20210215-husky" />
+    <meta property="og:image" content="https://clomie.dev/images/clomie.png" />
+    <meta property="twitter:card" content="summary" />
+    <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+    <title>husky v5 - clomie.dev</title>
+  </head>
+  <body>
+    <header>
+      <a class="site-title" href="/">clomie.dev</a>
+      <nav><a href="/about">About</a><a href="https://www.google.com/search?q=site:clomie.dev">Search</a><a href="/feed.xml">Feed</a></nav>
+    </header>
+    <main>
+      <article>
+        <h1>husky v5</h1>
+        <div class="timestamp"><time datetime="2021-02-15T00:31:20+09:00">2021/02/15 00:31</time></div>
+        <div>
+          <p><a href="https://github.com/typicode/husky">husky</a> が v5 にメジャーバージョンアップしたので、<a href="https://github.com/clomie/linjar">linjar</a> の husky をアップデートした。</p>
+          <p>マイグレーション用のツールとして <a href="https://github.com/typicode/husky-4-to-5">husky-4-to-5</a> が用意されている。"Requires npm 7" とあるが、npm 6 以前でも npx で特に何の問題もなく実行できた。</p>
+          <pre><code>$ npx github:typicode/husky-4-to-5 --package-manager npm
+</code></pre>
+          <p>実行すると husky v5 と <a href="https://github.com/typicode/pinst">pinst</a> のインストールと、package.json の scripts セクション と husky v5 用のスクリプトファイルが自動構成された。設定ファイルは手直しが必要だった。</p>
+          <p>linjar の package.json には prepublishonly スクリプトが既に設定されていて、自動構成されなかったので手直しする必要があった。また、これまでの pre-commit フックは npm scripts のコンテキストで実行されていたが、husky v5 からはただのスクリプトになっている。</p>
+          <p>pinst は postinstall タスクを有効化・無効化するだけのモジュールだった。v5 以降で postinstall スクリプトが必要になったが、ライブラリパッケージの場合は package.json に設定があるとパッケージを使う側でも postinstall スクリプトが動いてしまう。これを回避するためのモジュールと理解した。</p>
+          <p>新しい husky はライブラリ依存がなくなって、作りもシンプルになっていた。 <code>husky install</code> コマンドを実行すると、git の <code>core.hookspath</code> 設定が husky 専用に作られたディレクトリに設定されて、専用の環境変数を扱うためのシェルスクリプトがコピーされる。あとはただ git hooks の機能で動くし、その時 husky が間で動くということもない。</p>
+          <pre><code>% git config --get core.hookspath
+.husky
+</code></pre>
+          <p>マイグレーションしたコミットは<a href="https://github.com/clomie/linjar/commit/e05514379f31aae04069ec689f57fdc35af6d7e9">これ</a>。</p>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
