@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">clomie.dev</title>
-  <updated>2021-02-14T15:32:42.317Z</updated>
+  <updated>2021-02-23T15:24:13.516Z</updated>
   <id>https://clomie.dev/</id>
   <link rel="alternate" href="https://clomie.dev/" />
   <link rel="self" type="application/atom+xml" href="https://clomie.dev/feed.xml" />
   <author>
     <name>clomie</name>
   </author>
+  <entry>
+    <title type="text">トライアローグ</title>
+    <id>https://clomie.dev/posts/20210224-trialogue</id>
+    <link rel="alternate" type="text/html" href="https://clomie.dev/posts/20210224-trialogue" />
+    <published>2021-02-23T15:23:25.000Z</published>
+    <updated>2021-02-23T15:23:25.000Z</updated>
+    <content type="html">&lt;p&gt;横浜美術館で開催されている展覧会 トライアローグ を観てきた。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://yokohama.art.museum/special/2020/trialogue/&quot;&gt;トライアローグ：横浜美術館・愛知県美術館・富山県美術館　20世紀西洋美術コレクション ｜ 横浜美術館&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/posts/20210130-artthinking&quot;&gt;アート思考の本を読んで&lt;/a&gt;以降、どこか美術館に行きたいと思い開催中の展覧会を検索したりしていたけど、これまで自分から美術館に行こうとは考えたこともなかったので、何をどう選んでいいのか全くわからなかった。&lt;/p&gt;
+&lt;p&gt;この展覧会については、新美の巨人たちで、この展覧会に展示されている作品について放送していたのをきっかけに知った。展覧会の内容が20世紀西洋美術で、アート思考で取り上げられている内容とも共通点が多かったので、いま観るにはちょうど良さそうと思い、妻と行くことにした。&lt;/p&gt;
+&lt;p&gt;入場して始めのほうは、作品に対する自分なりの感想に気持ちを向けてみたり、特に目を引く作品については印象をメモ書きしながら見ていた。しかし大半の作品に対して第一印象としてよくわからないが先に来るのに、さらに何をどう思うかと自分に問いかけ続けるのは辛かった。この展覧会を観ることで何かを得ようという気持ちになりすぎたように思う。&lt;/p&gt;
+&lt;p&gt;図録を買って帰ったのは良かった。展覧会で作品を前にしているときよりも、後から図録を見返しながら内容について妻と話しているときの方が、たくさん感想が出てきたし、楽しかった。現地では何を感じればいいのかわからないぐらいに思っていたのに、後から図録を見ていると、これを見たときにこう感じた、あれを思い出した、といった感想が出てくるのが不思議だ。目の前の出来ごとや見聞きしていることに対して、自分の感想をその場で意識するのは、自分にとっては難しいことであるようだ。&lt;/p&gt;
+&lt;p&gt;結果的に、精神的にはかなり疲れたものの、展覧会には行って良かったと思う。&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title type="text">husky v5</title>
     <id>https://clomie.dev/posts/20210215-husky</id>
