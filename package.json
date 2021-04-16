@@ -16,12 +16,12 @@
     "dayjs": "1.10.4",
     "globby": "11.0.3",
     "gray-matter": "4.0.2",
-    "jsdom": "16.5.2",
+    "jsdom": "16.5.3",
     "linjar": "1.0.2",
     "prettier": "2.2.1",
     "rehype-stringify": "8.0.0",
     "remark-parse": "9.0.0",
-    "remark-rehype": "8.0.0",
+    "remark-rehype": "8.1.0",
     "unified": "9.2.1"
   }
 }
