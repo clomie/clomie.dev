@@ -15,7 +15,7 @@
     "cpy": "8.1.2",
     "dayjs": "1.10.4",
     "globby": "11.0.3",
-    "gray-matter": "4.0.2",
+    "gray-matter": "4.0.3",
     "jsdom": "16.5.3",
     "linjar": "1.0.2",
     "prettier": "2.2.1",
