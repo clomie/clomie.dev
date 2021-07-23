@@ -1,8 +1,7 @@
-import '@prettier/plugin-xml'
-import { mkdirSync, writeFileSync } from 'fs'
 import { join, parse } from 'path'
 import { render, VNode } from 'linjar'
 import { format, Options as PrettierOptions } from 'prettier'
+const xmlPlugin = require('@prettier/plugin-xml')
 
 type Route<T> = {
   path: string
@@ -43,6 +42,7 @@ const prettify = (body: string, path: string) => {
     printWidth: Number.MAX_SAFE_INTEGER,
     // @ts-ignore
     xmlWhitespaceSensitivity: 'ignore',
+    plugins: [xmlPlugin],
   }
   return format(body, prettierOptions)
 }
