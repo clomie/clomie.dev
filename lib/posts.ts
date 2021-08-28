@@ -1,4 +1,4 @@
-import { sync as globbySync } from 'globby'
+import { globbySync } from 'globby'
 import { join, relative, parse } from 'path'
 import { parseMarkdown } from './parser/markdown'
 
