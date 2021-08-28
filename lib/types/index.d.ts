@@ -1,3 +1,5 @@
+declare module '@prettier/plugin-xml'
+
 declare type Post = {
   path: string
   title: string

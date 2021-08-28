@@ -1,7 +1,7 @@
 import { join, parse } from 'path'
 import { render, VNode } from 'linjar'
-import { format, Options as PrettierOptions } from 'prettier'
-const xmlPlugin = require('@prettier/plugin-xml')
+import prettier, { Options as PrettierOptions } from 'prettier'
+import xmlPlugin from '@prettier/plugin-xml'
 
 type Route<T> = {
   path: string
@@ -44,7 +44,7 @@ const prettify = (body: string, path: string) => {
     xmlWhitespaceSensitivity: 'ignore',
     plugins: [xmlPlugin],
   }
-  return format(body, prettierOptions)
+  return prettier.format(body, prettierOptions)
 }
 
 export const renderer: (route: Route<any>) => ContentFile = ({
