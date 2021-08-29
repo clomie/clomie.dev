@@ -5,7 +5,7 @@ import { JSDOM } from 'jsdom'
 import stringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remark2rehype from 'remark-rehype'
-import unified from 'unified'
+import { unified } from 'unified'
 
 const readTimestamps = (path: string) => {
   const cmd = `git --no-pager log --no-color --pretty=format:'%ad' -- ${path}`
