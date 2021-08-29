@@ -21,8 +21,8 @@
     "linjar": "1.0.2",
     "prettier": "2.3.2",
     "rehype-stringify": "9.0.1",
-    "remark-parse": "9.0.0",
-    "remark-rehype": "8.1.0",
+    "remark-parse": "10.0.0",
+    "remark-rehype": "9.0.0",
     "unified": "10.1.0"
   }
 }
