@@ -22,7 +22,7 @@
     "prettier": "2.4.1",
     "rehype-stringify": "9.0.2",
     "remark-parse": "10.0.0",
-    "remark-rehype": "9.0.0",
+    "remark-rehype": "9.1.0",
     "unified": "10.1.0"
   }
 }
