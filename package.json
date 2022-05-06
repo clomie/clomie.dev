@@ -14,7 +14,7 @@
   "dependencies": {
     "@prettier/plugin-xml": "1.2.0",
     "cpy": "8.1.2",
-    "dayjs": "1.11.1",
+    "dayjs": "1.11.2",
     "globby": "13.1.1",
     "gray-matter": "4.0.3",
     "jsdom": "19.0.0",
