@@ -37,5 +37,5 @@ files.forEach((file) => {
 
 // Copy static files
 ;(async () => {
-  await cpy('.', '.' + outDir, { cwd: staticDir, parents: true })
+  await cpy('.', '.' + outDir, { cwd: staticDir })
 })()
