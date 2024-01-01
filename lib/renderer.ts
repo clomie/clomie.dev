@@ -47,7 +47,7 @@ const prettify = (body: string, path: string) => {
   return prettier.format(body, prettierOptions)
 }
 
-export const renderer: (route: Route<any>) => ContentFile = ({
+export const renderer: (route: Route<any>) => Promise<ContentFile> = async ({
   path,
   pageComponent,
   pageProps,
@@ -56,7 +56,7 @@ export const renderer: (route: Route<any>) => ContentFile = ({
 
   const node = pageComponent({ path, ...pageProps })
   const rendered = render(node, { xml: normalizedPath.endsWith('.xml') })
-  const prettified = prettify(
+  const prettified = await prettify(
     declaration(normalizedPath) + rendered,
     normalizedPath
   )

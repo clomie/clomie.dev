@@ -26,16 +26,17 @@ const routes = [
   }),
   route('/feed.xml', FeedPage, { posts }),
 ]
-const files = routes.map((route) => renderer(route))
-files.push(renderSitemap(posts.map(({ path }) => path)))
 
-// Output contents
-files.forEach((file) => {
-  const path = writeContent(outDir, file)
-  console.log(`Generated: ${path}`)
-})
-
-// Copy static files
 ;(async () => {
+  const files = await Promise.all(routes.map((route) => renderer(route)))
+  files.push(renderSitemap(posts.map(({ path }) => path)))
+
+  // Output contents
+  files.forEach((file) => {
+    const path = writeContent(outDir, file)
+    console.log(`Generated: ${path}`)
+  })
+
+  // Copy static files
   await cpy('.', '.' + outDir, { cwd: staticDir })
 })()
