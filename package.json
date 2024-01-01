@@ -7,7 +7,6 @@
   },
   "devDependencies": {
     "@types/jsdom": "21.1.6",
-    "@types/prettier": "2.7.3",
     "ts-node": "10.9.2",
     "typescript": "5.3.3"
   },
