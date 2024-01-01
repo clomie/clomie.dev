@@ -38,5 +38,5 @@ const routes = [
   })
 
   // Copy static files
-  await cpy('.', '.' + outDir, { cwd: staticDir })
+  await cpy('./**', '.' + outDir, { cwd: staticDir })
 })()
