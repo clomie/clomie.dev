@@ -6,23 +6,23 @@
     "build": "TS_NODE_FILES=true node --experimental-specifier-resolution=node --loader ts-node/esm index.ts"
   },
   "devDependencies": {
-    "@types/jsdom": "20.0.0",
-    "@types/prettier": "2.7.1",
-    "ts-node": "10.9.1",
-    "typescript": "4.8.4"
+    "@types/jsdom": "21.1.6",
+    "@types/prettier": "2.7.3",
+    "ts-node": "10.9.2",
+    "typescript": "5.3.3"
   },
   "dependencies": {
-    "@prettier/plugin-xml": "2.2.0",
-    "cpy": "9.0.1",
-    "dayjs": "1.11.6",
-    "globby": "13.1.2",
+    "@prettier/plugin-xml": "3.2.2",
+    "cpy": "11.0.0",
+    "dayjs": "1.11.10",
+    "globby": "14.0.0",
     "gray-matter": "4.0.3",
-    "jsdom": "20.0.1",
-    "linjar": "1.0.2",
-    "prettier": "2.7.1",
-    "rehype-stringify": "9.0.3",
-    "remark-parse": "10.0.1",
-    "remark-rehype": "10.1.0",
-    "unified": "10.1.2"
+    "jsdom": "23.0.1",
+    "linjar": "1.0.3",
+    "prettier": "3.1.1",
+    "rehype-stringify": "10.0.0",
+    "remark-parse": "11.0.0",
+    "remark-rehype": "11.0.0",
+    "unified": "11.0.4"
   }
 }
