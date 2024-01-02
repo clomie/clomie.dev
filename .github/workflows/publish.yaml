@@ -1,9 +1,6 @@
 name: publish
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
   publish:
@@ -20,6 +17,9 @@ jobs:
             ${{ runner.os }}-node-
       - run: npm ci
       - run: npm run build
+        if: github.ref == 'refs/heads/main'
+      - run: npm run build:preview
+        if: github.ref != 'refs/heads/main'
       - uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
