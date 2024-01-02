@@ -26,3 +26,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: clomie
           directory: dist
+          branch: preview
